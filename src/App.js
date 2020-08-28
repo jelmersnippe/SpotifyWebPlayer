@@ -22,6 +22,7 @@ function App() {
     cookies.set("session_token", urlToken.access_token, { path: "/" });
     console.log("url token: ", urlToken.access_token);
     spotify.setAccessToken(urlToken.access_token);
+    console.log(cookies.get("session_token"));
   }
 
   return (

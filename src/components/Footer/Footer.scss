@@ -24,32 +24,48 @@
   }
 
   .track-control {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     flex: 0.4;
     max-width: 300px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    height: 100%;
 
-    .icon {
-      padding: 8px;
-      transition: 200ms;
-      cursor: pointer;
+    .actions {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
 
-      &.active,
-      &:hover {
-        color: #1db954;
-        border-color: #1db954;
+      .icon {
+        padding: 8px;
+        transition: 200ms;
+        cursor: pointer;
+
+        &.active,
+        &:hover {
+          color: #1db954;
+          border-color: #1db954;
+        }
+      }
+
+      .play {
+        border: 1px solid white;
+        border-radius: 50%;
+
+        &:hover {
+          transform: scale(1.2);
+          transition: 0.2s ease-in-out;
+        }
       }
     }
+  }
 
-    .play {
-      border: 1px solid white;
-      border-radius: 50%;
+  .bar {
+    display: flex;
+    align-items: center;
 
-      &:hover {
-        transform: scale(1.2);
-        transition: 0.2s ease-in-out;
-      }
+    > span {
+      padding: 0 8px;
     }
   }
 

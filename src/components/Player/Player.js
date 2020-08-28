@@ -5,6 +5,7 @@ import { Sidebar, PlaylistView, HomeView, Footer } from "../../components";
 import { Route, Switch } from "react-router-dom";
 import { useDataLayerValue } from "../../DataLayer";
 import SpotifyWebApi from "spotify-web-api-js";
+import SpotifyWebPlayer from "./SpotifyWebPlayer";
 
 function Player() {
   const [{}, dispatch] = useDataLayerValue();
@@ -27,6 +28,7 @@ function Player() {
     spotify
       .getUserPlaylists()
       .then((playlists) => {
+        console.log(playlists);
         dispatch({
           type: "SET_PLAYLISTS",
           playlists,
@@ -51,6 +53,7 @@ function Player() {
 
   return (
     <>
+      <SpotifyWebPlayer access_token={spotify.getAccessToken()} />
       <div className="main-content">
         <Sidebar />
         <div className="body">
@@ -64,7 +67,11 @@ function Player() {
             <Route path="/library">
               <h2>Library</h2>
             </Route>
-            <Route path="/logout">{cookies.remove("session_token")}</Route>
+            <Route path="/logout">
+              {() => {
+                cookies.remove("session_token");
+              }}
+            </Route>
             <Route
               path="/playlist/:playlistId"
               render={(routerProps) => {
