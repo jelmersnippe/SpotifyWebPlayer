@@ -29,17 +29,18 @@ function Sidebar() {
       So basically add a SearchView, HomeView and LibraryView
       */}
       <ul className="section menu-items">
-        <SidebarItem text="Home" Icon={HomeIcon} path="/" key="Home" />
+        <SidebarItem text="Home" Icon={HomeIcon} path="/" key="home" />
         <SidebarItem
           text="Search"
           Icon={SearchIcon}
           path="/search"
-          key="Search"
+          key="search"
         />
         <SidebarItem
           text="Your Library"
           Icon={LibraryMusicIcon}
           path="/library"
+          key="library"
         />
       </ul>
 
@@ -47,6 +48,7 @@ function Sidebar() {
         <h3 className="section-title">Playlists</h3>
         {playlists?.items?.map((playlist) => (
           <SidebarItem
+            type="playlist"
             text={playlist.name}
             path={`/playlist/${playlist.id}`}
             key={playlist.id}

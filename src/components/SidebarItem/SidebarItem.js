@@ -1,10 +1,16 @@
 import React from "react";
+import { NavLink } from "react-router-dom";
 import "./SidebarItem.scss";
 
-function SidebarItem({ text, Icon, path }) {
+function SidebarItem({ text, Icon, path, type }) {
   return (
-    <li className="sidebar-item" key={text}>
-      <a className="link" href={path} title={text}>
+    <li className={`sidebar-item ${type}`}>
+      <NavLink
+        className="link"
+        exact={path === "/"}
+        activeClassName="active"
+        to={path}
+      >
         {Icon ? (
           <>
             <Icon className="icon" />
@@ -13,7 +19,7 @@ function SidebarItem({ text, Icon, path }) {
         ) : (
           <span className="text">{text}</span>
         )}
-      </a>
+      </NavLink>
     </li>
   );
 }

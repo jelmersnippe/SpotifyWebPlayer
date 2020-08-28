@@ -3,7 +3,6 @@ import Cookies from "universal-cookie";
 import "./App.scss";
 import { Login, Player } from "./components";
 import { getTokenFromUrl } from "./spotify";
-import { useDataLayerValue } from "./DataLayer";
 import SpotifyWebApi from "spotify-web-api-js";
 
 function App() {

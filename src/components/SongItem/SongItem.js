@@ -4,7 +4,7 @@ import SpotifyWebApi from "spotify-web-api-js";
 import { useDataLayerValue } from "../../DataLayer";
 
 function SongItem(props) {
-  const [{ playbackState }, dispatch] = useDataLayerValue();
+  const [{}, dispatch] = useDataLayerValue();
   const spotify = new SpotifyWebApi();
 
   function playTrack(trackUri) {

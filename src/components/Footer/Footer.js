@@ -23,6 +23,10 @@ function Footer() {
   // And preferably put the functionality in a seperate js file
   // Make the 'setPlaybackState' an async function that can be called anywhere since it's used alot
   function switchPlayState() {
+    if (!playbackState) {
+      alert("No playback found!");
+      return;
+    }
     if (playbackState.is_playing) {
       spotify.pause().then(() => {
         dispatch({
@@ -41,6 +45,10 @@ function Footer() {
   }
 
   function skipToNext() {
+    if (!playbackState) {
+      alert("No playback found!");
+      return;
+    }
     spotify
       .skipToNext()
       .then(() => {
@@ -59,6 +67,10 @@ function Footer() {
   }
 
   function skipToPrevious() {
+    if (!playbackState) {
+      alert("No playback found!");
+      return;
+    }
     spotify
       .skipToPrevious()
       .then(() => {
@@ -86,6 +98,10 @@ function Footer() {
   }
 
   function setShuffle() {
+    if (!playbackState) {
+      alert("No playback found!");
+      return;
+    }
     spotify
       .setShuffle(!playbackState.shuffle_state)
       .then(() => {
@@ -101,6 +117,10 @@ function Footer() {
   }
 
   function setVolume(event, newValue) {
+    if (!playbackState) {
+      alert("No playback found!");
+      return;
+    }
     spotify
       .setVolume(newValue)
       .then(() => {

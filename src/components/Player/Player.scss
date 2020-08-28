@@ -1,8 +1,4 @@
-.player {
-  height: 100vh;
-
-  .main-content {
-    display: flex;
-    height: 90vh;
-  }
+.main-content {
+  display: flex;
+  height: calc(100vh - 96px);
 }

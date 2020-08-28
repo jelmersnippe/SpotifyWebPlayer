@@ -4,6 +4,11 @@
   color: white;
   background: #040404;
   padding: 24px;
+  overflow-y: auto;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
 
   .logo {
     height: 40px;
