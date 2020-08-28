@@ -1,0 +1,33 @@
+.banner {
+  display: flex;
+  align-items: flex-end;
+  padding: 32px;
+
+  .art {
+    width: 240px;
+    margin-right: 32px;
+  }
+
+  .info {
+    color: white;
+
+    .title {
+      text-transform: uppercase;
+    }
+
+    .name {
+      font-size: 80px;
+      margin-bottom: 8px;
+    }
+
+    .description {
+      margin-bottom: 8px;
+    }
+
+    .creator {
+      color: white;
+      font-weight: bold;
+      margin-top: 8px;
+    }
+  }
+}

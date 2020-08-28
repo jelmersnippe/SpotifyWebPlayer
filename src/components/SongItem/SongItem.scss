@@ -1,0 +1,31 @@
+.song-item {
+  color: white;
+  display: flex;
+  flex-direction: row;
+  padding: 8px;
+  align-items: center;
+  transition: 0.2s;
+  cursor: pointer;
+
+  &:hover {
+    background: rgba(0, 0, 0, 0.7);
+  }
+
+  .track-art {
+    padding-right: 16px;
+  }
+
+  .track-info {
+    .title {
+      font-weight: bold;
+    }
+
+    .artist-album {
+      display: flex;
+
+      span {
+        padding: 0 8px;
+      }
+    }
+  }
+}

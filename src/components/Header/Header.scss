@@ -1,0 +1,41 @@
+// Add a sticky version when scrolling down the page with just the title
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 32px;
+  padding-bottom: 0;
+
+  .searchbar {
+    display: flex;
+    align-items: center;
+    background: white;
+    color: #282828;
+    padding: 4px 8px;
+    border-radius: 20px;
+
+    .input {
+      outline: none;
+      border: none;
+    }
+  }
+
+  .user {
+    display: flex;
+    align-items: center;
+    border-radius: 20px;
+    background: rgba(0, 0, 0, 0.7);
+
+    .avatar {
+      height: 32px;
+      width: 32px;
+    }
+
+    .name {
+      color: white;
+      font-weight: bold;
+      padding: 0 16px 0 8px;
+    }
+  }
+}

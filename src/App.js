@@ -1,24 +1,33 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import Cookies from "universal-cookie";
+import "./App.scss";
+import { Login, Player } from "./components";
+import { getTokenFromUrl } from "./spotify";
+import { useDataLayerValue } from "./DataLayer";
+import SpotifyWebApi from "spotify-web-api-js";
 
 function App() {
+  const spotify = new SpotifyWebApi();
+  const cookies = new Cookies();
+  let sessionToken = null;
+  if (cookies.get("session_token")) {
+    sessionToken = cookies.get("session_token");
+    console.log("session token: ", sessionToken);
+    spotify.setAccessToken(sessionToken);
+  }
+
+  const urlToken = getTokenFromUrl();
+  window.location.hash = "";
+
+  if (urlToken.access_token) {
+    cookies.set("session_token", urlToken.access_token, { path: "/" });
+    console.log("url token: ", urlToken.access_token);
+    spotify.setAccessToken(urlToken.access_token);
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="app">
+      {urlToken.access_token || sessionToken ? <Player /> : <Login />}
     </div>
   );
 }
