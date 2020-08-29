@@ -35,7 +35,7 @@ const reducer = (state, action) => {
     case "SET_ALBUMS":
       return {
         ...state,
-        albums: action.albums,
+        albums: state.albums.concat(action.albums),
       };
     default:
       return state;

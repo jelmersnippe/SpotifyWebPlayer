@@ -23,6 +23,21 @@ function Player() {
   const spotify = new SpotifyWebApi();
   const cookies = new Cookies();
 
+  async function getAlbums(offset) {
+    spotify
+      .getMySavedAlbums({ limit: 50, offset: offset })
+      .then((response) => {
+        dispatch({
+          type: "SET_ALBUMS",
+          albums: response.items,
+        });
+        if (response.items.length >= 50) {
+          getAlbums(offset + 50);
+        }
+      })
+      .catch((error) => console.log(error));
+  }
+
   useEffect(() => {
     spotify
       .getMe()
@@ -58,15 +73,7 @@ function Player() {
       })
       .catch((error) => console.log(error));
 
-    spotify
-      .getMySavedAlbums({ limit: 50 })
-      .then((response) => {
-        dispatch({
-          type: "SET_ALBUMS",
-          albums: response.items,
-        });
-      })
-      .catch((error) => console.log(error));
+    getAlbums(0);
 
     spotify
       .getMyCurrentPlaybackState()
