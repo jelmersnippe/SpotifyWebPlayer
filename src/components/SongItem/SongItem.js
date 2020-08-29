@@ -1,13 +1,11 @@
 import React from "react";
 import "./SongItem.scss";
 import SpotifyWebApi from "spotify-web-api-js";
-import { useDataLayerValue } from "../../DataLayer";
 
-function SongItem(props) {
-  const [{}, dispatch] = useDataLayerValue();
+function SongItem({ track, context_uri }) {
   const spotify = new SpotifyWebApi();
 
-  function playTrack(trackUri) {
+  function playTrack() {
     // Right now the song just gets played
     // It should automatically queue the rest of the album/artist/playlist
 
@@ -18,35 +16,31 @@ function SongItem(props) {
     //    This is tracked in the playbackState's context -> it contains a reference to the playlist/artist/album that is being played.
     //    This reference can be used to pull the other tracks in the container and add them to the "UP NEXT" list
     spotify
-      .play({ uris: [trackUri] })
-      .then(() => {
-        setTimeout(() => {
-          spotify.getMyCurrentPlaybackState().then((response) => {
-            dispatch({
-              type: "SET_PLAYBACK_STATE",
-              playbackState: response,
-            });
-          });
-        }, 300);
+      .play({
+        context_uri: context_uri,
+        offset: {
+          uri: track.track.uri,
+        },
+        position_ms: 0,
+      })
+      .then((response) => {
+        console.log(response);
       })
       .catch((error) => console.log(error));
   }
 
   return (
-    <div
-      className="song-item"
-      onDoubleClick={() => playTrack(props.track.track.uri)}
-    >
+    <div className="song-item" onDoubleClick={() => playTrack()}>
       <img
         className="track-art"
-        src={props.track.track.album.images[2].url}
-        alt={props.track.track.name}
+        src={track.track.album.images[2].url}
+        alt={track.track.name}
       />
       <div className="track-info">
-        <div className="title">{props.track.track.name}</div>
+        <div className="title">{track.track.name}</div>
         <div className="artist-album">
           <div className="artist">
-            {props.track.track.artists.reduce((initial, artist) => {
+            {track.track.artists.reduce((initial, artist) => {
               if (initial !== "") {
                 initial += ", ";
               }
@@ -55,7 +49,7 @@ function SongItem(props) {
             }, "")}
           </div>
           <span> - </span>
-          <div className="album">{props.track.track.album.name}</div>
+          <div className="album">{track.track.album.name}</div>
         </div>
       </div>
     </div>

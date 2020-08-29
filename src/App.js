@@ -11,7 +11,6 @@ function App() {
   let sessionToken = null;
   if (cookies.get("session_token")) {
     sessionToken = cookies.get("session_token");
-    console.log("session token: ", sessionToken);
     spotify.setAccessToken(sessionToken);
   }
 
@@ -20,9 +19,7 @@ function App() {
 
   if (urlToken.access_token) {
     cookies.set("session_token", urlToken.access_token, { path: "/" });
-    console.log("url token: ", urlToken.access_token);
     spotify.setAccessToken(urlToken.access_token);
-    console.log(cookies.get("session_token"));
   }
 
   return (

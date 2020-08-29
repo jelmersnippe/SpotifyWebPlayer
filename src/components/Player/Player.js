@@ -1,7 +1,14 @@
 import React, { useEffect } from "react";
 import Cookies from "universal-cookie";
 import "./Player.scss";
-import { Sidebar, PlaylistView, HomeView, Footer } from "../../components";
+import {
+  Sidebar,
+  PlaylistView,
+  HomeView,
+  Footer,
+  QueueView,
+  Header,
+} from "../../components";
 import { Route, Switch } from "react-router-dom";
 import { useDataLayerValue } from "../../DataLayer";
 import SpotifyWebApi from "spotify-web-api-js";
@@ -28,7 +35,6 @@ function Player() {
     spotify
       .getUserPlaylists()
       .then((playlists) => {
-        console.log(playlists);
         dispatch({
           type: "SET_PLAYLISTS",
           playlists,
@@ -57,6 +63,7 @@ function Player() {
       <div className="main-content">
         <Sidebar />
         <div className="body">
+          <Header />
           <Switch>
             <Route exact path="/">
               <HomeView />
@@ -66,6 +73,9 @@ function Player() {
             </Route>
             <Route path="/library">
               <h2>Library</h2>
+            </Route>
+            <Route path="/queue">
+              <QueueView />
             </Route>
             <Route path="/logout">
               {() => {

@@ -1,6 +1,6 @@
 import React from "react";
 import "./PlaylistView.scss";
-import { Header, Banner, SongList } from "..";
+import { Banner, SongList } from "..";
 import { useDataLayerValue } from "../../DataLayer";
 
 function PlaylistView({ id }) {
@@ -8,7 +8,6 @@ function PlaylistView({ id }) {
 
   return (
     <>
-      <Header />
       {playlists?.items?.map(
         (playlist) =>
           playlist.id === id && (

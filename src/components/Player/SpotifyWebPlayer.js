@@ -69,7 +69,7 @@ function SpotifyWebPlayer({ access_token }) {
                   play: true,
                 }),
               })
-                .then((response) => response.json())
+                .then((response) => console.log(response))
                 .catch((error) => console.log(error));
             });
 

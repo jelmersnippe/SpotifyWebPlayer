@@ -16,6 +16,7 @@ function Sidebar() {
       <a
         href="https://open.spotify.com/"
         title="Open Spotify.com in the browser"
+        target="_blank"
       >
         <img
           className="logo"

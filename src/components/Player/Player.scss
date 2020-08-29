@@ -1,4 +1,8 @@
 .main-content {
   display: flex;
   height: calc(100vh - 96px);
+
+  .body {
+    padding: 32px;
+  }
 }

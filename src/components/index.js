@@ -9,6 +9,7 @@ import { Banner } from "./Banner";
 import { SongList } from "./SongList";
 import { SongItem } from "./SongItem";
 import { HomeView } from "./HomeView";
+import { QueueView } from "./QueueView";
 
 export {
   Login,
@@ -22,4 +23,5 @@ export {
   SongList,
   SongItem,
   HomeView,
+  QueueView,
 };

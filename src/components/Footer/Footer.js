@@ -13,34 +13,20 @@ import PlaylistPlayIcon from "@material-ui/icons/PlaylistPlay";
 import VolumeDownIcon from "@material-ui/icons/VolumeDown";
 import Slider from "@material-ui/core/Slider";
 
-import LinearProgress from "@material-ui/core/LinearProgress";
+import { SidebarItem } from "../../components";
 
-import { useDataLayerValue, DataLayerContext } from "../../DataLayer";
+import { useDataLayerValue } from "../../DataLayer";
 import SpotifyWebApi from "spotify-web-api-js";
-const BorderLinearProgress = withStyles((theme) => ({
-  root: {
-    height: 4,
-    width: 100 + "%",
-    borderRadius: 5,
-  },
-  colorPrimary: {
-    backgroundColor:
-      theme.palette.grey[theme.palette.type === "light" ? 200 : 700],
-  },
-  bar: {
-    borderRadius: 5,
-    backgroundColor: "#1a90ff",
-  },
-}))(LinearProgress);
 
 function Footer() {
   const [{ playbackState }, dispatch] = useDataLayerValue();
   const spotify = new SpotifyWebApi();
   const [progress, setProgress] = useState(0);
+  const [interactingWithProgress, setInteractingWithProgress] = useState(false);
 
   // Update the track bar every 1 second
   useEffect(() => {
-    if (playbackState) {
+    if (playbackState && !interactingWithProgress) {
       setProgress(playbackState.position);
       if (!playbackState.paused) {
         const timer = setInterval(() => {
@@ -52,14 +38,33 @@ function Footer() {
         };
       }
     }
-  }, [playbackState]);
+  }, [playbackState, interactingWithProgress]);
 
   // When the playbackState changes, update the trackbar
   useEffect(() => {
     if (playbackState) {
       setProgress(playbackState.position);
+      setInteractingWithProgress(false);
     }
   }, [playbackState]);
+
+  const handleProgressChange = (event, newValue) => {
+    setInteractingWithProgress(true);
+    setProgress(newValue);
+  };
+
+  const handleProgressCommit = (event, newValue) => {
+    setProgress(newValue);
+    spotify
+      .seek(newValue)
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        console.log(error);
+        setInteractingWithProgress(false);
+      });
+  };
 
   // Make a seperate component for track control
   // And preferably put the functionality in a seperate js file
@@ -106,15 +111,8 @@ function Footer() {
         console.log(response);
       })
       .catch((error) => {
-        spotify.seek(0).then(() => {
-          setTimeout(() => {
-            spotify.getMyCurrentPlaybackState().then((response) => {
-              dispatch({
-                type: "SET_PLAYBACK_STATE",
-                playbackState: response,
-              });
-            });
-          }, 300);
+        spotify.seek(0).then((response) => {
+          console.log(response);
         });
       });
   }
@@ -166,7 +164,10 @@ function Footer() {
               alt=""
             />
             <div className="track-info">
-              <h4 className="artist">
+              <h4 className="name">
+                {playbackState?.track_window?.current_track?.name}
+              </h4>
+              <span className="artist">
                 {playbackState?.track_window?.current_track?.artists
                   .map((artist) => artist.name)
                   .reduce((initial, artist) => {
@@ -176,9 +177,6 @@ function Footer() {
                     initial += artist;
                     return initial;
                   }, "")}
-              </h4>
-              <span className="name">
-                {playbackState?.track_window?.current_track?.name}
               </span>
             </div>
           </>
@@ -222,13 +220,19 @@ function Footer() {
         </div>
         {playbackState && (
           <div className="bar">
-            <span className="progress">{Math.floor(progress / 1000)}</span>
-            <BorderLinearProgress
-              variant="determinate"
-              value={(progress / playbackState.duration) * 100}
+            <span className="progress">
+              {Math.floor(((progress / 1000) % 3600) / 60)}:
+              {(Math.floor(progress / 1000) % 3600) % 60}
+            </span>
+            <Slider
+              value={progress}
+              max={playbackState.duration}
+              onChange={handleProgressChange}
+              onChangeCommitted={handleProgressCommit}
             />
             <span className="duration">
-              {Math.floor(playbackState.duration / 1000)}
+              {Math.floor(((playbackState.duration / 1000) % 3600) / 60)}:
+              {(Math.floor(playbackState.duration / 1000) % 3600) % 60}
             </span>
           </div>
         )}
@@ -238,8 +242,15 @@ function Footer() {
         {/* 
         Add functionality for this queue button
           So basically, add a QueueView
+            in this view we have to get the current playbackState's context, with the current track as offset
         */}
-        <PlaylistPlayIcon className="icon queue" />
+
+        <SidebarItem
+          Icon={PlaylistPlayIcon}
+          path="/queue"
+          key="queue"
+          className="icon queue"
+        />
 
         <div className="volume-control">
           <VolumeDownIcon className="icon volume" />

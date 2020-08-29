@@ -23,7 +23,11 @@ function SongList({ playlist }) {
     <ul className="songlist">
       {/* Spotify has some sort of filtering with tracks you cant play, should implement this because now there are unplayable tracks */}
       {playlistTracks?.items?.map((track) => (
-        <SongItem track={track} key={track.track.id} />
+        <SongItem
+          track={track}
+          context_uri={playlist.uri}
+          key={track.track.id}
+        />
       ))}
     </ul>
   );

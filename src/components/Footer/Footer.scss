@@ -10,16 +10,24 @@
   box-sizing: border-box;
   color: white;
   height: 96px;
+  min-width: 700px;
 
   .currently-playing {
     flex: 0.3;
     display: flex;
     align-items: center;
+    max-width: 30%;
 
     .album-cover {
       padding-right: 24px;
       height: 100%;
       width: auto;
+    }
+
+    .track-info {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
   }
 
@@ -65,7 +73,7 @@
     align-items: center;
 
     > span {
-      padding: 0 8px;
+      margin: 0 4px;
     }
   }
 
