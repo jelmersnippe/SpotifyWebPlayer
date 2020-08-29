@@ -15,7 +15,7 @@ function Header() {
         <input
           className="input"
           type="text"
-          placeholder="Search for songs, albums or podcasts"
+          placeholder="<Not functional> Search for songs, albums or podcasts"
         />
       </div>
       {user && (

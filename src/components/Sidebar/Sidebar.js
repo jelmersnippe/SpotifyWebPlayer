@@ -1,6 +1,6 @@
 import React from "react";
 import "./Sidebar.scss";
-import { SidebarItem } from "../../components";
+import { NavItem } from "../../components";
 import HomeIcon from "@material-ui/icons/Home";
 import SearchIcon from "@material-ui/icons/Search";
 import LibraryMusicIcon from "@material-ui/icons/LibraryMusic";
@@ -17,6 +17,7 @@ function Sidebar() {
         href="https://open.spotify.com/"
         title="Open Spotify.com in the browser"
         target="_blank"
+        rel="noopener noreferrer"
       >
         <img
           className="logo"
@@ -25,22 +26,13 @@ function Sidebar() {
         />
       </a>
 
-      {/* 
-      Add functionality for these buttons 
-      So basically add a SearchView, HomeView and LibraryView
-      */}
       <ul className="section menu-items">
-        <SidebarItem text="Home" Icon={HomeIcon} path="/" key="home" />
-        <SidebarItem
-          text="Search"
-          Icon={SearchIcon}
-          path="/search"
-          key="search"
-        />
-        <SidebarItem
+        <NavItem text="Home" Icon={HomeIcon} path="/" key="home" />
+        <NavItem text="Search" Icon={SearchIcon} path="/search" key="search" />
+        <NavItem
           text="Your Library"
           Icon={LibraryMusicIcon}
-          path="/library"
+          path="/library/playlists"
           key="library"
         />
       </ul>
@@ -48,7 +40,7 @@ function Sidebar() {
       <ul className="section playlists">
         <h3 className="section-title">Playlists</h3>
         {playlists?.items?.map((playlist) => (
-          <SidebarItem
+          <NavItem
             type="playlist"
             text={playlist.name}
             path={`/playlist/${playlist.id}`}

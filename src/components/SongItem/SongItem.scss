@@ -4,6 +4,7 @@
   flex-direction: row;
   padding: 8px;
   align-items: center;
+  justify-content: space-between;
   transition: 0.2s;
   cursor: pointer;
 
@@ -11,21 +12,32 @@
     background: rgba(0, 0, 0, 0.7);
   }
 
-  .track-art {
-    padding-right: 16px;
-  }
-
   .track-info {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    .track-art {
+      padding-right: 16px;
+    }
+
     .title {
       font-weight: bold;
     }
 
     .artist-album {
       display: flex;
+      flex-wrap: wrap;
 
       span {
         padding: 0 8px;
       }
     }
+  }
+
+  .icon.play {
+    padding: 4px;
+    border: 1px solid white;
+    border-radius: 50%;
   }
 }

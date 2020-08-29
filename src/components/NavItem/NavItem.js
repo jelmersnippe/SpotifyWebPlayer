@@ -1,10 +1,10 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import "./SidebarItem.scss";
+import "./NavItem.scss";
 
-function SidebarItem({ text, Icon, path, type }) {
+function NavItem({ text, Icon, path, type }) {
   return (
-    <div className={`sidebar-item ${type}`}>
+    <div className={`nav-item ${type && type}`}>
       <NavLink
         className="link"
         exact={path === "/"}
@@ -24,4 +24,4 @@ function SidebarItem({ text, Icon, path, type }) {
   );
 }
 
-export default SidebarItem;
+export default NavItem;

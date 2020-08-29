@@ -3,8 +3,8 @@ import "./HomeView.scss";
 
 function HomeView() {
   return (
-    <div>
-      <h2>HomeView</h2>
+    <div className="home view">
+      <h2 className="title">Home</h2>
     </div>
   );
 }

@@ -1,0 +1,30 @@
+.mobile-nav {
+  @media (min-width: 767px) {
+    display: none;
+  }
+
+  position: absolute;
+  bottom: 96px;
+  left: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+
+  .nav-item {
+    flex: 1;
+    background: #222222;
+    border: 1px solid;
+    border-bottom: none;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+
+    .link {
+      justify-content: center;
+
+      &.active {
+        padding: 6px 0;
+      }
+    }
+  }
+}

@@ -3,7 +3,7 @@
 export const initialState = {
   user: null,
   playlists: [],
-  playbackState: null,
+  playbackState: {},
 };
 
 const reducer = (state, action) => {

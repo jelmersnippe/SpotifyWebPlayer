@@ -1,0 +1,23 @@
+.currently-playing.view {
+  .title {
+    color: white;
+    text-align: center;
+    margin-bottom: 16px;
+  }
+
+  .album-cover {
+    width: 100%;
+    margin-bottom: 16px;
+  }
+
+  .track-info {
+    text-align: center;
+    .name {
+      color: white;
+      font-weight: bold;
+    }
+    .artist {
+      color: grey;
+    }
+  }
+}

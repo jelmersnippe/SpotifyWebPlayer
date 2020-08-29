@@ -1,4 +1,4 @@
-.sidebar-item {
+.nav-item {
   color: grey;
 
   &:hover {
@@ -12,8 +12,8 @@
     align-items: center;
     cursor: pointer;
 
-    .icon {
-      margin-right: 8px;
+    .icon + .text {
+      margin-left: 8px;
     }
 
     &.active {

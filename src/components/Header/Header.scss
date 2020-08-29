@@ -3,8 +3,13 @@
 .header {
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  padding-bottom: 32px;
+  align-items: flex-start;
+  padding-bottom: 16px;
+  flex-wrap: wrap-reverse;
+
+  @media (max-width: 767px) {
+    display: none;
+  }
 
   .searchbar {
     display: flex;

@@ -8,6 +8,10 @@ import {
   Footer,
   QueueView,
   Header,
+  MobileNav,
+  LibraryView,
+  SearchView,
+  CurrentlyPlayingView,
 } from "../../components";
 import { Route, Switch } from "react-router-dom";
 import { useDataLayerValue } from "../../DataLayer";
@@ -65,17 +69,24 @@ function Player() {
         <div className="body">
           <Header />
           <Switch>
+            {/* 
+            Add functionality for these routes 
+            So basically add a SearchView, HomeView and LibraryView
+            */}
             <Route exact path="/">
               <HomeView />
             </Route>
             <Route path="/search">
-              <h2>Search</h2>
+              <SearchView />
             </Route>
             <Route path="/library">
-              <h2>Library</h2>
+              <LibraryView />
             </Route>
             <Route path="/queue">
               <QueueView />
+            </Route>
+            <Route path="/currently-playing">
+              <CurrentlyPlayingView />
             </Route>
             <Route path="/logout">
               {() => {
@@ -91,9 +102,10 @@ function Player() {
               }}
             />
           </Switch>
+
+          <MobileNav />
         </div>
       </div>
-
       <Footer />
     </>
   );

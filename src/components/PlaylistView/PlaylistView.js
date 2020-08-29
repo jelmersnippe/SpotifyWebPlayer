@@ -7,7 +7,7 @@ function PlaylistView({ id }) {
   const [{ playlists }] = useDataLayerValue();
 
   return (
-    <>
+    <div className="playlist view">
       {playlists?.items?.map(
         (playlist) =>
           playlist.id === id && (
@@ -17,7 +17,7 @@ function PlaylistView({ id }) {
             </div>
           )
       )}
-    </>
+    </div>
   );
 }
 
