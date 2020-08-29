@@ -41,18 +41,23 @@ function Footer() {
       <div className="currently-playing">
         {playbackState && (
           <>
-            <img
-              className="album-cover"
-              src={
-                playbackState?.item?.album?.images?.reduce((initial, image) => {
-                  if (!initial.url || image.height < initial.height) {
-                    initial = image;
-                  }
-                  return initial;
-                }, {}).url
-              }
-              alt=""
-            />
+            <Link to="/currently-playing">
+              <img
+                className="album-cover"
+                src={
+                  playbackState?.item?.album?.images?.reduce(
+                    (initial, image) => {
+                      if (!initial.url || image.height < initial.height) {
+                        initial = image;
+                      }
+                      return initial;
+                    },
+                    {}
+                  ).url
+                }
+                alt=""
+              />
+            </Link>
             <div className="track-info">
               <h4 className="name">{playbackState?.item?.name}</h4>
               <span className="artist">

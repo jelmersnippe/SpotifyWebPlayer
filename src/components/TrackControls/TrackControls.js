@@ -16,6 +16,11 @@ import SpotifyWebApi from "spotify-web-api-js";
 function TrackControls({ location }) {
   const [{ playbackState }, dispatch] = useDataLayerValue();
   const spotify = new SpotifyWebApi();
+
+  // Track progress in the datalayer
+  // The footer and currently playing trackcontrols arent synced
+  // because they pull from the playbackState when first loading
+  // This means that the currently playing window is not up to date
   const [progress, setProgress] = useState(0);
   const [interactingWithProgress, setInteractingWithProgress] = useState(false);
 
@@ -197,6 +202,12 @@ function TrackControls({ location }) {
           />
         )}
       </div>
+
+      {/* 
+        This display '0' when the progress is at 0
+        Has to be checked with a different method,
+        probably just an 'isSet' bool
+       */}
       {progress && playbackState && (
         <div className="bar">
           <span className="progress">

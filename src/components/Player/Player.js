@@ -64,49 +64,57 @@ function Player() {
   return (
     <>
       <SpotifyWebPlayer access_token={spotify.getAccessToken()} />
-      <div className="main-content">
-        <Sidebar />
-        <div className="body">
-          <Header />
-          <Switch>
-            {/* 
+      <Switch>
+        <Route path="/currently-playing">
+          <div className="row-container">
+            <Sidebar />
+            <CurrentlyPlayingView />
+            <MobileNav />
+          </div>
+        </Route>
+        <Route>
+          <div className="body">
+            <Sidebar />
+            <div className="main-content">
+              <Header />
+              <Switch>
+                {/* 
             Add functionality for these routes 
             So basically add a SearchView, HomeView and LibraryView
             */}
-            <Route exact path="/">
-              <HomeView />
-            </Route>
-            <Route path="/search">
-              <SearchView />
-            </Route>
-            <Route path="/library">
-              <LibraryView />
-            </Route>
-            <Route path="/queue">
-              <QueueView />
-            </Route>
-            <Route path="/currently-playing">
-              <CurrentlyPlayingView />
-            </Route>
-            <Route path="/logout">
-              {() => {
-                cookies.remove("session_token");
-              }}
-            </Route>
-            <Route
-              path="/playlist/:playlistId"
-              render={(routerProps) => {
-                return (
-                  <PlaylistView id={routerProps.match.params.playlistId} />
-                );
-              }}
-            />
-          </Switch>
+                <Route exact path="/">
+                  <HomeView />
+                </Route>
+                <Route path="/search">
+                  <SearchView />
+                </Route>
+                <Route path="/library">
+                  <LibraryView />
+                </Route>
+                <Route path="/queue">
+                  <QueueView />
+                </Route>
+                <Route path="/logout">
+                  {() => {
+                    cookies.remove("session_token");
+                  }}
+                </Route>
+                <Route
+                  path="/playlist/:playlistId"
+                  render={(routerProps) => {
+                    return (
+                      <PlaylistView id={routerProps.match.params.playlistId} />
+                    );
+                  }}
+                />
+              </Switch>
 
-          <MobileNav />
-        </div>
-      </div>
-      <Footer />
+              <MobileNav />
+            </div>
+          </div>
+          <Footer />
+        </Route>
+      </Switch>
     </>
   );
 }

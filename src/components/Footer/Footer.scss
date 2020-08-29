@@ -2,14 +2,13 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  position: fixed;
+  position: relative;
   bottom: 0;
   width: 100vw;
   padding: 16px 24px;
   background: #282828;
   box-sizing: border-box;
   color: white;
-  position: relative;
   height: 96px;
 
   .currently-playing {

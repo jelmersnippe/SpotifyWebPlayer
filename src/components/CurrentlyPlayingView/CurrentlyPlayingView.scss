@@ -1,4 +1,13 @@
 .currently-playing.view {
+  height: 100vh;
+  flex: 1;
+  background: #222222;
+  padding: 32px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
   .title {
     color: white;
     text-align: center;
@@ -6,12 +15,14 @@
   }
 
   .album-cover {
-    width: 100%;
-    margin-bottom: 16px;
+    max-width: 100%;
+    margin: 24px auto;
   }
 
   .track-info {
     text-align: center;
+    flex: 1;
+
     .name {
       color: white;
       font-weight: bold;
@@ -20,4 +31,20 @@
       color: grey;
     }
   }
+
+  .track-controls {
+    margin: 16px 0;
+
+    @media (min-width: 768px) {
+      width: 50%;
+    }
+
+    .bar {
+      margin-bottom: 8px;
+    }
+  }
+}
+
+.view.currently-playing ~ .mobile-nav {
+  bottom: 0;
 }

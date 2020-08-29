@@ -3,6 +3,8 @@ import "./CurrentlyPlayingView.scss";
 import { useDataLayerValue } from "../../DataLayer";
 import { TrackControls } from "../../components";
 
+// When this view is active it should take up the full width,
+// covering the footer
 function CurrentlyPlayingView() {
   const [{ playbackState }] = useDataLayerValue();
 
@@ -14,24 +16,19 @@ function CurrentlyPlayingView() {
           <img
             className="album-cover"
             src={
-              playbackState?.track_window?.current_track?.album?.images?.reduce(
-                (initial, image) => {
-                  if (!initial.url || image.height > initial.height) {
-                    initial = image;
-                  }
-                  return initial;
-                },
-                {}
-              ).url
+              playbackState?.item?.album?.images?.reduce((initial, image) => {
+                if (!initial.url || image.height > initial.height) {
+                  initial = image;
+                }
+                return initial;
+              }, {}).url
             }
-            alt=""
+            alt={playbackState?.item?.album?.name}
           />
           <div className="track-info">
-            <h4 className="name">
-              {playbackState?.track_window?.current_track?.name}
-            </h4>
+            <h4 className="name">{playbackState?.item?.name}</h4>
             <span className="artist">
-              {playbackState?.track_window?.current_track?.artists
+              {playbackState?.item?.artists
                 .map((artist) => artist.name)
                 .reduce((initial, artist) => {
                   if (initial !== "") {
