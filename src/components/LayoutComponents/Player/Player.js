@@ -12,9 +12,9 @@ import {
   LibraryView,
   SearchView,
   CurrentlyPlayingView,
-} from "../../components";
+} from "../..";
 import { Route, Switch } from "react-router-dom";
-import { useDataLayerValue } from "../../DataLayer";
+import { useDataLayerValue } from "../../../DataLayer";
 import SpotifyWebApi from "spotify-web-api-js";
 import SpotifyWebPlayer from "./SpotifyWebPlayer";
 
@@ -47,6 +47,26 @@ function Player() {
       .catch((error) => {
         console.log(error);
       });
+
+    spotify
+      .getFollowedArtists()
+      .then((response) => {
+        dispatch({
+          type: "SET_ARTISTS",
+          artists: response.artists.items,
+        });
+      })
+      .catch((error) => console.log(error));
+
+    spotify
+      .getMySavedAlbums({ limit: 50 })
+      .then((response) => {
+        dispatch({
+          type: "SET_ALBUMS",
+          albums: response.items,
+        });
+      })
+      .catch((error) => console.log(error));
 
     spotify
       .getMyCurrentPlaybackState()
@@ -88,9 +108,16 @@ function Player() {
                 <Route path="/search">
                   <SearchView />
                 </Route>
-                <Route path="/library">
-                  <LibraryView />
-                </Route>
+                <Route
+                  path="/library/:libraryType"
+                  render={(routerProps) => {
+                    return (
+                      <LibraryView
+                        type={routerProps.match.params.libraryType}
+                      />
+                    );
+                  }}
+                />
                 <Route path="/queue">
                   <QueueView />
                 </Route>

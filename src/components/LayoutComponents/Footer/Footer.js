@@ -5,12 +5,12 @@ import "./Footer.scss";
 import PlaylistPlayIcon from "@material-ui/icons/PlaylistPlay";
 import VolumeDownIcon from "@material-ui/icons/VolumeDown";
 import Slider from "@material-ui/core/Slider";
-import { TrackControls } from "../../components";
-import { useDataLayerValue } from "../../DataLayer";
+import { TrackControls } from "../..";
+import { useDataLayerValue } from "../../../DataLayer";
 import SpotifyWebApi from "spotify-web-api-js";
 
 function Footer() {
-  const [{ playbackState }, dispatch] = useDataLayerValue();
+  const [{ playbackState }] = useDataLayerValue();
   const [volume, setVolume] = useState(100);
   const spotify = new SpotifyWebApi();
 

@@ -24,7 +24,7 @@ function SongItem({ track, context_uri }) {
         <img
           className="track-art"
           src={track.track.album.images[2].url}
-          alt={track.track.name}
+          alt=""
         />
         <div className="text">
           <div className="title">{track.track.name}</div>

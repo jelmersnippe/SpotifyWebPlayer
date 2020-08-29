@@ -1,5 +1,5 @@
 import React from "react";
-import { useDataLayerValue } from "../../DataLayer";
+import { useDataLayerValue } from "../../../DataLayer";
 import SpotifyWebApi from "spotify-web-api-js";
 
 function injectScript(src) {
@@ -61,15 +61,14 @@ function SpotifyWebPlayer({ access_token }) {
                     ...playbackState.actions,
                     disallows: state.disallows,
                   },
-                  item: {
-                    ...playbackState.item,
-                    duration_ms: state.duration,
-                  },
                   is_playing: !state.paused,
                   progress_ms: state.position,
                   shuffle_state: state.shuffle,
                   timestamp: state.timestamp,
-                  item: state.track_window.current_track,
+                  item: {
+                    ...state.track_window.current_track,
+                    duration_ms: state.duration,
+                  },
                 },
               });
             } else {

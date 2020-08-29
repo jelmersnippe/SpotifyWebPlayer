@@ -1,7 +1,8 @@
 import React from "react";
 import "./PlaylistView.scss";
-import { Banner, SongList } from "..";
-import { useDataLayerValue } from "../../DataLayer";
+import { Banner } from "./Banner";
+import { SongList } from "../../../components";
+import { useDataLayerValue } from "../../../DataLayer";
 
 function PlaylistView({ id }) {
   const [{ playlists }] = useDataLayerValue();

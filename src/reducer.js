@@ -3,6 +3,8 @@
 export const initialState = {
   user: null,
   playlists: [],
+  artists: [],
+  albums: [],
   playbackState: {},
 };
 
@@ -24,6 +26,16 @@ const reducer = (state, action) => {
       return {
         ...state,
         playbackState: action.playbackState,
+      };
+    case "SET_ARTISTS":
+      return {
+        ...state,
+        artists: action.artists,
+      };
+    case "SET_ALBUMS":
+      return {
+        ...state,
+        albums: action.albums,
       };
     default:
       return state;

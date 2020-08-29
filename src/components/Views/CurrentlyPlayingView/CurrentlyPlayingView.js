@@ -1,7 +1,7 @@
 import React from "react";
 import "./CurrentlyPlayingView.scss";
-import { useDataLayerValue } from "../../DataLayer";
-import { TrackControls } from "../../components";
+import { useDataLayerValue } from "../../../DataLayer";
+import { TrackControls } from "../../../components";
 
 // When this view is active it should take up the full width,
 // covering the footer
@@ -23,7 +23,7 @@ function CurrentlyPlayingView() {
                 return initial;
               }, {}).url
             }
-            alt={playbackState?.item?.album?.name}
+            alt=""
           />
           <div className="track-info">
             <h4 className="name">{playbackState?.item?.name}</h4>

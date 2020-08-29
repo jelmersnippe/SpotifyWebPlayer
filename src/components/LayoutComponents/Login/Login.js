@@ -1,6 +1,6 @@
 import React from "react";
 import "./Login.scss";
-import { loginUrl } from "../../spotify";
+import { loginUrl } from "../../../spotify";
 
 function Login() {
   return (
@@ -8,7 +8,7 @@ function Login() {
       <img
         className="logo"
         src={process.env.PUBLIC_URL + "/spotify_logo_large.png"}
-        alt="Spotify logo"
+        alt="Spotify"
       />
       <a className="action" href={loginUrl}>
         Login to spotify

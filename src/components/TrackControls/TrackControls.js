@@ -14,7 +14,7 @@ import { useDataLayerValue } from "../../DataLayer";
 import SpotifyWebApi from "spotify-web-api-js";
 
 function TrackControls({ location }) {
-  const [{ playbackState }, dispatch] = useDataLayerValue();
+  const [{ playbackState }] = useDataLayerValue();
   const spotify = new SpotifyWebApi();
 
   // Track progress in the datalayer
@@ -208,7 +208,7 @@ function TrackControls({ location }) {
         Has to be checked with a different method,
         probably just an 'isSet' bool
        */}
-      {progress && playbackState && (
+      {playbackState && progress > 0 && (
         <div className="bar">
           <span className="progress">
             {Math.floor(((progress / 1000) % 3600) / 60)}:
