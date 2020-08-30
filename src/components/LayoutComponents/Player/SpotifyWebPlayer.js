@@ -51,7 +51,18 @@ function SpotifyWebPlayer({ access_token }) {
 
           // Playback status updates
           player.addListener("player_state_changed", (state) => {
-            if (playbackState) {
+            console.log(state);
+            if (!state || !playbackState) {
+              spotifyAPI
+                .getMyCurrentPlaybackState()
+                .then((playbackState) => {
+                  dispatch({
+                    type: "SET_PLAYBACK_STATE",
+                    playbackState,
+                  });
+                })
+                .catch((error) => console.log(error));
+            } else {
               dispatch({
                 type: "SET_PLAYBACK_STATE",
                 playbackState: {
@@ -71,16 +82,6 @@ function SpotifyWebPlayer({ access_token }) {
                   },
                 },
               });
-            } else {
-              spotifyAPI
-                .getMyCurrentPlaybackState()
-                .then((playbackState) => {
-                  dispatch({
-                    type: "SET_PLAYBACK_STATE",
-                    playbackState,
-                  });
-                })
-                .catch((error) => console.log(error));
             }
           });
 
@@ -94,7 +95,7 @@ function SpotifyWebPlayer({ access_token }) {
               }),
               body: JSON.stringify({
                 device_ids: ["24cba3f0f9714dde242fe9233d4366284439a19b"],
-                play: true,
+                play: false,
               }),
             }).catch((error) => console.log(error));
           });

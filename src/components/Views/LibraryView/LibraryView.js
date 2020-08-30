@@ -1,16 +1,12 @@
 import React from "react";
 import "./LibraryView.scss";
-import {
-  NavItem,
-  PlaylistItem,
-  ArtistItem,
-  AlbumItem,
-} from "../../../components";
-import { useDataLayerValue } from "../../../DataLayer";
+import { NavItem } from "../../../components";
+
+import { ArtistOverview } from "./ArtistOverview";
+import { AlbumOverview } from "./AlbumOverview";
+import { PlaylistOverview } from "./PlaylistOverview";
 
 function LibraryView({ type }) {
-  const [{ playlists, artists, albums }] = useDataLayerValue();
-
   return (
     <div className="library view">
       <h2 className="title">Library</h2>
@@ -20,16 +16,9 @@ function LibraryView({ type }) {
         <NavItem text="Albums" path="/library/albums" key="albums" />
       </div>
       <div className={`content ${type}`}>
-        {type === "playlists" &&
-          playlists?.items?.map((playlist) => (
-            <PlaylistItem playlist={playlist} key={playlist.id} />
-          ))}
-        {type === "artists" &&
-          artists.map((artist) => (
-            <ArtistItem artist={artist} key={artist.id} />
-          ))}
-        {type === "albums" &&
-          albums.map((album) => <AlbumItem album={album} key={album.id} />)}
+        {type === "playlists" && <PlaylistOverview />}
+        {type === "artists" && <ArtistOverview />}
+        {type === "albums" && <AlbumOverview />}
       </div>
     </div>
   );

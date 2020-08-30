@@ -4,6 +4,8 @@ import "./Player.scss";
 import {
   Sidebar,
   PlaylistView,
+  ArtistView,
+  AlbumView,
   HomeView,
   Footer,
   QueueView,
@@ -23,34 +25,7 @@ function Player() {
   const spotify = new SpotifyWebApi();
   const cookies = new Cookies();
 
-  async function getAlbums(offset) {
-    spotify
-      .getMySavedAlbums({ limit: 50, offset: offset })
-      .then((response) => {
-        dispatch({
-          type: "SET_ALBUMS",
-          albums: response.items,
-        });
-        if (response.items.length >= 50) {
-          getAlbums(offset + 50);
-        }
-      })
-      .catch((error) => console.log(error));
-  }
-
   useEffect(() => {
-    spotify
-      .getMe()
-      .then((user) => {
-        dispatch({
-          type: "SET_USER",
-          user,
-        });
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-
     spotify
       .getUserPlaylists()
       .then((playlists) => {
@@ -62,18 +37,6 @@ function Player() {
       .catch((error) => {
         console.log(error);
       });
-
-    spotify
-      .getFollowedArtists()
-      .then((response) => {
-        dispatch({
-          type: "SET_ARTISTS",
-          artists: response.artists.items,
-        });
-      })
-      .catch((error) => console.log(error));
-
-    getAlbums(0);
 
     spotify
       .getMyCurrentPlaybackState()
@@ -139,6 +102,20 @@ function Player() {
                     return (
                       <PlaylistView id={routerProps.match.params.playlistId} />
                     );
+                  }}
+                />
+                <Route
+                  path="/artist/:artistId"
+                  render={(routerProps) => {
+                    return (
+                      <ArtistView id={routerProps.match.params.artistId} />
+                    );
+                  }}
+                />
+                <Route
+                  path="/album/:albumId"
+                  render={(routerProps) => {
+                    return <AlbumView id={routerProps.match.params.albumId} />;
                   }}
                 />
               </Switch>

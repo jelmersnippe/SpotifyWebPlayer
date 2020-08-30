@@ -1,22 +1,29 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./PlaylistView.scss";
 import { Banner } from "./Banner";
 import { SongList } from "../../../components";
-import { useDataLayerValue } from "../../../DataLayer";
+import SpotifyWebApi from "spotify-web-api-js";
 
 function PlaylistView({ id }) {
-  const [{ playlists }] = useDataLayerValue();
+  const [playlist, setPlaylist] = useState(null);
+  const spotify = new SpotifyWebApi();
+
+  useEffect(() => {
+    spotify
+      .getPlaylist(id)
+      .then((response) => {
+        setPlaylist(response);
+      })
+      .catch((error) => console.log(error));
+  }, [id]);
 
   return (
     <div className="playlist view">
-      {playlists?.items?.map(
-        (playlist) =>
-          playlist.id === id && (
-            <div key={id}>
-              <Banner playlist={playlist} />
-              <SongList playlist={playlist} />
-            </div>
-          )
+      {playlist && (
+        <>
+          <Banner playlist={playlist} />
+          <SongList playlist={playlist} />
+        </>
       )}
     </div>
   );

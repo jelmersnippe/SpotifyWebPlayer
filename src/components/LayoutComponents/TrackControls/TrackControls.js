@@ -10,7 +10,7 @@ import RepeatIcon from "@material-ui/icons/Repeat";
 import RepeatOneIcon from "@material-ui/icons/RepeatOne";
 import Slider from "@material-ui/core/Slider";
 
-import { useDataLayerValue } from "../../DataLayer";
+import { useDataLayerValue } from "../../../DataLayer";
 import SpotifyWebApi from "spotify-web-api-js";
 
 function TrackControls({ location }) {

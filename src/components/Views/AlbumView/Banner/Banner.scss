@@ -1,0 +1,53 @@
+.banner {
+  display: flex;
+  align-items: flex-end;
+  padding-bottom: 32px;
+
+  .art {
+    width: 240px;
+    margin-right: 32px;
+
+    @media (max-width: 1024px) {
+      width: 180px;
+    }
+
+    @media (max-width: 767px) {
+      display: none;
+    }
+  }
+
+  .info {
+    color: white;
+
+    .title {
+      text-transform: uppercase;
+    }
+
+    .name {
+      margin-bottom: 8px;
+      font-size: 80px;
+      word-break: break-word;
+
+      @media (max-width: 1024px) {
+        font-size: 60px;
+      }
+
+      @media (max-width: 767px) {
+        font-size: 40px;
+      }
+    }
+
+    .description {
+      margin-bottom: 8px;
+    }
+
+    .creator {
+      color: white;
+      margin-top: 8px;
+
+      @media (min-width: 768px) {
+        font-weight: bold;
+      }
+    }
+  }
+}

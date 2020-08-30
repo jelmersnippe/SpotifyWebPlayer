@@ -1,11 +1,27 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./Header.scss";
 import SearchIcon from "@material-ui/icons/Search";
 import { Avatar } from "@material-ui/core";
 import { useDataLayerValue } from "../../../DataLayer";
+import SpotifyWebApi from "spotify-web-api-js";
 
 function Header() {
-  const [{ user }] = useDataLayerValue();
+  const [{ user }, dispatch] = useDataLayerValue();
+  const spotify = new SpotifyWebApi();
+
+  useEffect(() => {
+    spotify
+      .getMe()
+      .then((user) => {
+        dispatch({
+          type: "SET_USER",
+          user,
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
 
   return (
     <div className="header">
