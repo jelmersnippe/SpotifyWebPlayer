@@ -1,21 +1,42 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./ArtistView.scss";
 import { Banner } from "./Banner";
-import { SongList } from "../..";
+import { AlbumList } from "./AlbumList";
+import SpotifyWebApi from "spotify-web-api-js";
+import { useDataLayerValue } from "../../../DataLayer";
 
 function ArtistView({ id }) {
+  const [{ user }] = useDataLayerValue();
+  const [artist, setArtist] = useState(null);
+  const [artistAlbums, setArtistAlbums] = useState(null);
+  const spotify = new SpotifyWebApi();
+
+  useEffect(() => {
+    spotify
+      .getArtist(id)
+      .then((response) => {
+        console.log(response);
+        setArtist(response);
+      })
+      .catch((error) => console.log(error));
+
+    let options = {
+      include_groups: "album",
+      country: user ? user.country : "",
+    };
+    spotify
+      .getArtistAlbums(id, options)
+      .then((response) => {
+        console.log(response);
+        setArtistAlbums(response);
+      })
+      .catch((error) => console.log(error));
+  }, [id, user]);
+
   return (
     <div className="artist view">
-      {/* {playlists?.items?.map(
-        (playlist) =>
-          playlist.id === id && (
-            <div key={id}>
-              <Banner playlist={playlist} />
-              <SongList playlist={playlist} />
-            </div>
-          )
-      )} */}
-      Artist View
+      {artist && <Banner artist={artist} />}
+      {artistAlbums && <AlbumList albums={artistAlbums.items} />}
     </div>
   );
 }

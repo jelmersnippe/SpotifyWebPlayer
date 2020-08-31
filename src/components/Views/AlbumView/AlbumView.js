@@ -1,23 +1,22 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./AlbumView.scss";
-import { Banner } from "./Banner";
-import { SongList } from "../..";
+import { AlbumItem } from "../ArtistView/AlbumList/AlbumItem";
+import SpotifyWebApi from "spotify-web-api-js";
 
 function AlbumView({ id }) {
-  return (
-    <div className="album view">
-      {/* {playlists?.items?.map(
-        (playlist) =>
-          playlist.id === id && (
-            <div key={id}>
-              <Banner playlist={playlist} />
-              <SongList playlist={playlist} />
-            </div>
-          )
-      )} */}
-      Album View
-    </div>
-  );
+  const [album, setAlbum] = useState(null);
+  const spotify = new SpotifyWebApi();
+
+  useEffect(() => {
+    spotify
+      .getAlbum(id)
+      .then((response) => {
+        setAlbum(response);
+      })
+      .catch((error) => console.log(error));
+  }, [id]);
+
+  return album && <AlbumItem album={album} />;
 }
 
 export default AlbumView;

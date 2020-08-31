@@ -10,8 +10,9 @@ function PlaylistView({ id }) {
 
   useEffect(() => {
     spotify
-      .getPlaylist(id)
+      .getPlaylist(id, { market: "from_token" })
       .then((response) => {
+        console.log(response);
         setPlaylist(response);
       })
       .catch((error) => console.log(error));
@@ -22,7 +23,10 @@ function PlaylistView({ id }) {
       {playlist && (
         <>
           <Banner playlist={playlist} />
-          <SongList playlist={playlist} />
+          <SongList
+            tracks={playlist.tracks.items.map((track) => track.track)}
+            context={playlist.uri}
+          />
         </>
       )}
     </div>

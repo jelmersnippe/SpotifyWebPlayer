@@ -1,0 +1,46 @@
+.album-item {
+  display: flex;
+  flex-direction: column;
+  color: white;
+
+  .album-header {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    transition: 0.2s;
+
+    &:hover {
+      color: #1db954;
+    }
+
+    .art {
+      width: 100px;
+      padding-right: 16px;
+    }
+
+    .album-info {
+      .year {
+        font-weight: normal;
+      }
+    }
+  }
+
+  .songlist {
+    border-top: 1px solid grey;
+    margin: 16px 0 64px;
+
+    .song-item {
+      border-bottom: 1px solid grey;
+      padding: 4px 8px;
+      font-size: 14px;
+
+      .icon {
+        font-size: 16px;
+
+        .play {
+          padding: 0;
+        }
+      }
+    }
+  }
+}
