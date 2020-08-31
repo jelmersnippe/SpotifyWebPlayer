@@ -26,8 +26,9 @@ function AlbumOverview() {
   useEffect(() => {
     getAlbums(0);
   }, []);
+
   return albums.map((album) => (
-    <AlbumItem album={album} key={album.album.id} />
+    <AlbumItem album={album.album} key={album.album.id} />
   ));
 }
 

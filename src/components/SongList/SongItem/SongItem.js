@@ -3,6 +3,9 @@ import { Link } from "react-router-dom";
 import "./SongItem.scss";
 import SpotifyWebApi from "spotify-web-api-js";
 import PlayArrowIcon from "@material-ui/icons/PlayArrow";
+import PauseIcon from "@material-ui/icons/Pause";
+import PlaylistPlayIcon from "@material-ui/icons/PlaylistPlay";
+import { useDataLayerValue } from "../../../DataLayer";
 
 function SongItem({
   track,
@@ -12,6 +15,7 @@ function SongItem({
   context_uri,
 }) {
   const spotify = new SpotifyWebApi();
+  const [{ playbackState }] = useDataLayerValue();
 
   function playTrack() {
     spotify
@@ -25,9 +29,38 @@ function SongItem({
       .catch((error) => console.log(error));
   }
 
+  function pauseTrack() {
+    spotify.pause().catch((error) => console.log(error));
+  }
+
+  function resumeTrack() {
+    spotify.play().catch((error) => console.log(error));
+  }
+
+  function queueTrack() {
+    spotify.queue(track.uri).catch((error) => console.log(error));
+  }
+
   return (
-    <div className="song-item" onDoubleClick={() => playTrack()}>
-      <PlayArrowIcon className="icon play" onClick={() => playTrack()} />
+    <div
+      className={`song-item ${
+        playbackState?.item?.id === track.id &&
+        playbackState?.context.uri === context_uri
+          ? "playing"
+          : ""
+      }`}
+      onDoubleClick={() => playTrack()}
+    >
+      {playbackState?.item?.id === track.id &&
+      playbackState?.context.uri === context_uri ? (
+        playbackState.is_playing ? (
+          <PauseIcon className="icon play" onClick={() => pauseTrack()} />
+        ) : (
+          <PlayArrowIcon className="icon play" onClick={() => resumeTrack()} />
+        )
+      ) : (
+        <PlayArrowIcon className="icon play" onClick={() => playTrack()} />
+      )}
       <div className="track-info">
         {showArt && (
           <img className="track-art" src={track.album.images[2].url} alt="" />
@@ -54,6 +87,10 @@ function SongItem({
             </div>
           )}
         </div>
+        <PlaylistPlayIcon className="enqueue" onClick={() => queueTrack()} />
+        <div className="duration">{`${Math.floor(
+          ((track.duration_ms / 1000) % 3600) / 60
+        )}:${(Math.floor(track.duration_ms / 1000) % 3600) % 60}`}</div>
       </div>
     </div>
   );

@@ -7,6 +7,13 @@
   transition: 0.2s;
   cursor: pointer;
 
+  &.playing .track-info .text .title,
+  &.playing .track-info .duration,
+  &.playing .icon.play {
+    color: #1db954;
+    border-color: #1db954;
+  }
+
   a:hover {
     text-decoration: underline;
   }
@@ -19,6 +26,7 @@
     display: flex;
     flex-direction: row;
     align-items: center;
+    flex: 1;
 
     .track-art {
       padding: 0 16px;
@@ -26,7 +34,6 @@
 
     .number {
       margin: 0 8px;
-      user-select: none;
     }
 
     .title {
@@ -40,6 +47,15 @@
       span {
         padding: 0 8px;
       }
+    }
+
+    .enqueue {
+      margin-left: auto;
+    }
+
+    .duration {
+      min-width: 40px;
+      text-align: right;
     }
   }
 

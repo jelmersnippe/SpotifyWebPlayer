@@ -4,11 +4,11 @@ import "./AlbumItem.scss";
 
 function AlbumItem({ album }) {
   return (
-    <Link to={`/album/${album.album.id}`} className="album-item library-item">
+    <Link to={`/album/${album.id}`} className="album-item library-item">
       <img
         className="art"
         src={
-          album?.album?.images?.reduce((initial, image) => {
+          album?.images?.reduce((initial, image) => {
             if (!initial.url || image.height > initial.height) {
               initial = image;
             }
@@ -18,9 +18,9 @@ function AlbumItem({ album }) {
         alt=""
       />
       <div className="info">
-        <div className="name">{album.album.name}</div>
+        <div className="name">{album.name}</div>
         <div className="creator">
-          {album?.album?.artists
+          {album?.artists
             .map((artist) => artist.name)
             .reduce((initial, artist) => {
               if (initial !== "") {

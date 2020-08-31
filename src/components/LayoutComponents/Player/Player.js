@@ -8,7 +8,6 @@ import {
   AlbumView,
   HomeView,
   Footer,
-  QueueView,
   Header,
   MobileNav,
   LibraryView,
@@ -88,9 +87,6 @@ function Player() {
                     );
                   }}
                 />
-                <Route path="/queue">
-                  <QueueView />
-                </Route>
                 <Route path="/logout">
                   {() => {
                     cookies.remove("session_token");

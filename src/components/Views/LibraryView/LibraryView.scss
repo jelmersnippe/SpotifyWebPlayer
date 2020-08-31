@@ -29,76 +29,76 @@
     padding: 16px 0;
     display: flex;
     flex-wrap: wrap;
+  }
+}
 
-    .library-item {
-      display: flex;
-      flex-direction: column;
-      border-radius: 8px;
-      background: #222222;
-      width: 200px;
-      align-items: center;
-      margin: 0 16px 16px 0;
-      padding: 16px;
-      box-sizing: border-box;
-      transition: 0.2s;
+.library-item {
+  display: flex;
+  flex-direction: column;
+  border-radius: 8px;
+  background: #222222;
+  width: 200px;
+  align-items: center;
+  margin: 0 16px 16px 0;
+  padding: 16px;
+  box-sizing: border-box;
+  transition: 0.2s;
 
-      .art {
-        width: 160px;
-        height: 160px;
-        max-width: 100%;
+  .art {
+    width: 160px;
+    height: 160px;
+    max-width: 100%;
 
-        object-fit: cover;
-        margin-bottom: 16px;
-      }
+    object-fit: cover;
+    margin-bottom: 16px;
+  }
 
-      &:hover {
-        background: #282828;
-        .info {
-          .name {
-            color: #1db954;
-          }
-        }
-      }
-
-      .info {
-        color: white;
-        transition: 0.2s;
-        text-align: center;
-
-        .name {
-          font-weight: bold;
-        }
-
-        .creator {
-          color: grey;
-        }
+  &:hover {
+    background: #282828;
+    .info {
+      .name {
+        color: #1db954;
       }
     }
+  }
 
-    @media (max-width: 767px) {
-      .library-item {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        padding: 8px;
-        margin-right: 0;
-        width: 100%;
+  .info {
+    color: white;
+    transition: 0.2s;
+    text-align: center;
 
-        &:hover {
-          background: rgba(0, 0, 0, 0.7);
-        }
+    .name {
+      font-weight: bold;
+    }
 
-        .art {
-          width: 60px;
-          height: 60px;
-          margin: 0;
-        }
+    .creator {
+      color: grey;
+    }
+  }
+}
 
-        .info {
-          margin-left: 16px;
-          text-align: left;
-        }
-      }
+@media (max-width: 767px) {
+  .library-item {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 8px;
+    margin-right: 0;
+    width: 100%;
+
+    &:hover {
+      background: rgba(0, 0, 0, 0.7);
+    }
+
+    .art {
+      width: 60px;
+      height: 60px;
+      margin: 0;
+    }
+
+    .info {
+      margin-left: 16px;
+      text-align: left;
     }
   }
 }

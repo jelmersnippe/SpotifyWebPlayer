@@ -21,7 +21,6 @@ function ArtistView({ id }) {
       .catch((error) => console.log(error));
 
     let options = {
-      include_groups: "album",
       country: user ? user.country : "",
     };
     spotify

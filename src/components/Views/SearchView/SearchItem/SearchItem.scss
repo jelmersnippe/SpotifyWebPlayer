@@ -1,0 +1,42 @@
+.search-item {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  color: white;
+  width: calc(50% - 8px);
+  box-sizing: border-box;
+  margin-bottom: 16px;
+
+  &:hover {
+    background: rgba(0, 0, 0, 0.3);
+  }
+
+  .art {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+  }
+
+  &.artist .art {
+    border-radius: 50%;
+  }
+
+  .info {
+    width: calc(100% - 60px);
+    padding: 0 16px;
+    box-sizing: border-box;
+    flex: 1;
+
+    .name {
+      font-weight: bold;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .artist {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+  }
+}

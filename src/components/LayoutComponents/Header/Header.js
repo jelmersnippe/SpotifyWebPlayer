@@ -1,4 +1,5 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
+import { useHistory, useLocation } from "react-router-dom";
 import "./Header.scss";
 import SearchIcon from "@material-ui/icons/Search";
 import { Avatar } from "@material-ui/core";
@@ -8,6 +9,25 @@ import SpotifyWebApi from "spotify-web-api-js";
 function Header() {
   const [{ user }, dispatch] = useDataLayerValue();
   const spotify = new SpotifyWebApi();
+  const history = useHistory();
+  const location = useLocation();
+  const [searchTerm, setSearchTerm] = useState("");
+
+  function handleSearch(event) {
+    if (location.pathname !== "/search") history.push("/search");
+    setSearchTerm(event.target.value);
+    spotify
+      .search(event.target.value, ["album", "artist", "track", "playlist"], {
+        limit: 4,
+      })
+      .then((response) => {
+        dispatch({
+          type: "SET_SEARCH_RESULTS",
+          searchResults: response,
+        });
+      })
+      .catch((error) => console.log(error));
+  }
 
   useEffect(() => {
     spotify
@@ -30,8 +50,9 @@ function Header() {
         <SearchIcon className="icon search" />
         <input
           className="input"
-          type="text"
-          placeholder="<Not functional> Search for songs, albums or podcasts"
+          value={searchTerm}
+          onChange={handleSearch}
+          placeholder="Search for songs, albums or artists"
         />
       </div>
       {user && (

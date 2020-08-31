@@ -1,0 +1,43 @@
+.search.view {
+  .result-grid {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: 100%;
+
+    .result-block {
+      width: calc(50% - 16px);
+
+      .header {
+        padding: 8px;
+        margin-bottom: 16px;
+        text-transform: capitalize;
+        border-bottom: 1px solid grey;
+
+        .type {
+          color: white;
+          font-weight: bold;
+        }
+
+        .see-all {
+          color: grey;
+          cursor: pointer;
+          text-transform: uppercase;
+
+          &:hover {
+            text-decoration: underline;
+            color: white;
+          }
+        }
+      }
+
+      .items {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-between;
+      }
+    }
+  }
+}

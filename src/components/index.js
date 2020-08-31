@@ -11,7 +11,6 @@ import { PlaylistView } from "./Views/PlaylistView";
 import { AlbumView } from "./Views/AlbumView";
 import { ArtistView } from "./Views/ArtistView";
 import { HomeView } from "./Views/HomeView";
-import { QueueView } from "./Views/QueueView";
 import { LibraryView } from "./Views/LibraryView";
 import { SearchView } from "./Views/SearchView";
 import { CurrentlyPlayingView } from "./Views/CurrentlyPlayingView";
@@ -31,7 +30,6 @@ export {
   AlbumView,
   ArtistView,
   HomeView,
-  QueueView,
   LibraryView,
   SearchView,
   CurrentlyPlayingView,

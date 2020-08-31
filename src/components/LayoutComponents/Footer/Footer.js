@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "./Footer.scss";
 
-import PlaylistPlayIcon from "@material-ui/icons/PlaylistPlay";
 import VolumeDownIcon from "@material-ui/icons/VolumeDown";
 import Slider from "@material-ui/core/Slider";
 import { TrackControls } from "../..";
@@ -80,10 +79,6 @@ function Footer() {
       <TrackControls location="footer" />
 
       <div className="right-section">
-        <Link to="/queue" className="icon queue">
-          <PlaylistPlayIcon />
-        </Link>
-
         <div className="volume-control">
           <VolumeDownIcon className="icon volume" />
           <Slider
