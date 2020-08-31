@@ -27,9 +27,13 @@ function AlbumOverview() {
     getAlbums(0);
   }, []);
 
-  return albums.map((album) => (
-    <AlbumItem album={album.album} key={album.album.id} />
-  ));
+  return (
+    <div className="content artists">
+      {albums.map((album) => (
+        <AlbumItem album={album.album} key={album.album.id} />
+      ))}
+    </div>
+  );
 }
 
 export default AlbumOverview;

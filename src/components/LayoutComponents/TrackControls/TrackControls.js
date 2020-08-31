@@ -76,12 +76,12 @@ function TrackControls({ location }) {
       return;
     }
     if (playbackState.is_playing) {
-      spotify.pause().then((response) => {
-        console.log(response);
+      spotify.pause().catch((error) => {
+        console.log(error);
       });
     } else {
-      spotify.play().then((response) => {
-        console.log(response);
+      spotify.play().catch((error) => {
+        console.log(error);
       });
     }
   }
@@ -91,14 +91,9 @@ function TrackControls({ location }) {
       alert("No playback found!");
       return;
     }
-    spotify
-      .skipToNext()
-      .then((response) => {
-        console.log(response);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    spotify.skipToNext().catch((error) => {
+      console.log(error);
+    });
   }
 
   function skipToPrevious() {
@@ -107,21 +102,11 @@ function TrackControls({ location }) {
       return;
     }
     if (playbackState?.actions?.disallows?.skipping_prev) {
-      spotify
-        .seek(0)
-        .then((response) => {
-          console.log(response);
-        })
-        .catch((error) => console.log(error));
+      spotify.seek(0).catch((error) => console.log(error));
     } else {
-      spotify
-        .skipToPrevious()
-        .then((response) => {
-          console.log(response);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+      spotify.skipToPrevious().catch((error) => {
+        console.log(error);
+      });
     }
   }
 
@@ -132,9 +117,6 @@ function TrackControls({ location }) {
     }
     spotify
       .setShuffle(!playbackState.shuffle_state)
-      .then((response) => {
-        console.log(response);
-      })
       .catch((error) => console.log(error));
   }
 

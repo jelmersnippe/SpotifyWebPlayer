@@ -6,9 +6,13 @@ import { PlaylistItem } from "./PlaylistItem";
 function PlaylistOverview() {
   const [{ playlists }] = useDataLayerValue();
 
-  return playlists?.items?.map((playlist) => (
-    <PlaylistItem playlist={playlist} key={playlist.id} />
-  ));
+  return (
+    <div className="content playlists">
+      {playlists?.items?.map((playlist) => (
+        <PlaylistItem playlist={playlist} key={playlist.id} />
+      ))}
+    </div>
+  );
 }
 
 export default PlaylistOverview;

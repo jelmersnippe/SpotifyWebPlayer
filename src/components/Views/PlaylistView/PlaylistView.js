@@ -12,7 +12,6 @@ function PlaylistView({ id }) {
     spotify
       .getPlaylist(id, { market: "from_token" })
       .then((response) => {
-        console.log(response);
         setPlaylist(response);
       })
       .catch((error) => console.log(error));

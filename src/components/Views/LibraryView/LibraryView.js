@@ -15,11 +15,9 @@ function LibraryView({ type }) {
         <NavItem text="Artists" path="/library/artists" key="artists" />
         <NavItem text="Albums" path="/library/albums" key="albums" />
       </div>
-      <div className={`content ${type}`}>
-        {type === "playlists" && <PlaylistOverview />}
-        {type === "artists" && <ArtistOverview />}
-        {type === "albums" && <AlbumOverview />}
-      </div>
+      {type === "playlists" && <PlaylistOverview />}
+      {type === "artists" && <ArtistOverview />}
+      {type === "albums" && <AlbumOverview />}
     </div>
   );
 }

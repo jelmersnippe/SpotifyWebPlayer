@@ -20,35 +20,46 @@ import SpotifyWebApi from "spotify-web-api-js";
 import SpotifyWebPlayer from "./SpotifyWebPlayer";
 
 function Player() {
-  const [{}, dispatch] = useDataLayerValue();
+  const [{ user }, dispatch] = useDataLayerValue();
   const spotify = new SpotifyWebApi();
   const cookies = new Cookies();
 
   useEffect(() => {
-    spotify
-      .getUserPlaylists()
-      .then((playlists) => {
-        dispatch({
-          type: "SET_PLAYLISTS",
-          playlists,
+    if (user) {
+      spotify
+        .getUserPlaylists(user.id)
+        .then((playlists) => {
+          dispatch({
+            type: "SET_PLAYLISTS",
+            playlists,
+          });
+        })
+        .catch((error) => {
+          console.log(error);
         });
-      })
-      .catch((error) => {
-        console.log(error);
-      });
 
-    spotify
-      .getMyCurrentPlaybackState()
-      .then((playbackState) => {
-        dispatch({
-          type: "SET_PLAYBACK_STATE",
-          playbackState,
-        });
+      fetch(`https://api.spotify.com/v1/users/${user.id}/playlists`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${spotify.getAccessToken()}`,
+        },
       })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, []);
+        .then((response) => response.json())
+        .then((data) => console.log(data));
+      spotify
+        .getMyCurrentPlaybackState()
+        .then((playbackState) => {
+          dispatch({
+            type: "SET_PLAYBACK_STATE",
+            playbackState,
+          });
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+  }, [user]);
 
   return (
     <>
@@ -74,7 +85,18 @@ function Player() {
                 <Route exact path="/">
                   <HomeView />
                 </Route>
-                <Route path="/search">
+                <Route exact path="/search">
+                  <SearchView />
+                </Route>
+                <Route
+                  path="/search/:searchType"
+                  render={(routerProps) => {
+                    return (
+                      <SearchView type={routerProps.match.params.searchType} />
+                    );
+                  }}
+                />
+                <Route exact path="/library">
                   <SearchView />
                 </Route>
                 <Route

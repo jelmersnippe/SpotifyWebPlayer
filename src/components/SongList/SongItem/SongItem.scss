@@ -7,6 +7,30 @@
   transition: 0.2s;
   cursor: pointer;
 
+  @media (max-width: 767px) {
+    .text {
+      .title {
+        font-size: 14px;
+      }
+
+      .artist-album {
+        span,
+        .album {
+          display: none;
+        }
+
+        .artist {
+          font-size: 12px;
+        }
+      }
+    }
+
+    .duration {
+      display: none;
+    }
+  }
+
+  &.playing .track-info .number,
   &.playing .track-info .text .title,
   &.playing .track-info .duration,
   &.playing .icon.play {

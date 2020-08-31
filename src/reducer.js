@@ -7,6 +7,7 @@ export const initialState = {
   albums: [],
   playbackState: {},
   searchResults: {},
+  searchTerm: "",
 };
 
 const reducer = (state, action) => {
@@ -45,11 +46,16 @@ const reducer = (state, action) => {
         albums: filteredAlbums,
       };
     case "SET_SEARCH_RESULTS":
-      console.log("setting results");
       return {
         ...state,
         searchResults: action.searchResults,
       };
+    case "SET_SEARCH_TERM":
+      return {
+        ...state,
+        searchTerm: action.searchTerm,
+      };
+
     default:
       return state;
   }

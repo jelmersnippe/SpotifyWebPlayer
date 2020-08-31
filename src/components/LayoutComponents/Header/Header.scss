@@ -11,20 +11,6 @@
     display: none;
   }
 
-  .searchbar {
-    display: flex;
-    align-items: center;
-    background: white;
-    color: #282828;
-    padding: 4px 8px;
-    border-radius: 20px;
-
-    .input {
-      outline: none;
-      border: none;
-    }
-  }
-
   .user {
     display: flex;
     align-items: center;
@@ -41,5 +27,19 @@
       font-weight: bold;
       padding: 0 16px 0 8px;
     }
+  }
+}
+
+.searchbar {
+  display: flex;
+  align-items: center;
+  background: white;
+  color: #282828;
+  padding: 4px 8px;
+  border-radius: 20px;
+
+  .input {
+    outline: none;
+    border: none;
   }
 }

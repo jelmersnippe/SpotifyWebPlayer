@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useHistory, useLocation } from "react-router-dom";
 import "./Header.scss";
 import SearchIcon from "@material-ui/icons/Search";
@@ -7,15 +7,17 @@ import { useDataLayerValue } from "../../../DataLayer";
 import SpotifyWebApi from "spotify-web-api-js";
 
 function Header() {
-  const [{ user }, dispatch] = useDataLayerValue();
+  const [{ user, searchTerm }, dispatch] = useDataLayerValue();
   const spotify = new SpotifyWebApi();
   const history = useHistory();
   const location = useLocation();
-  const [searchTerm, setSearchTerm] = useState("");
 
   function handleSearch(event) {
     if (location.pathname !== "/search") history.push("/search");
-    setSearchTerm(event.target.value);
+    dispatch({
+      type: "SET_SEARCH_TERM",
+      searchTerm: event.target.value,
+    });
     spotify
       .search(event.target.value, ["album", "artist", "track", "playlist"], {
         limit: 4,
@@ -46,7 +48,6 @@ function Header() {
   return (
     <div className="header">
       <div className="searchbar">
-        {/* Add search functionality with a dropdown, and a SearchView page for extensive searching */}
         <SearchIcon className="icon search" />
         <input
           className="input"

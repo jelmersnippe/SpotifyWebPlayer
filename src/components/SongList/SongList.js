@@ -12,7 +12,7 @@ function SongList({
   return (
     <ul className="songlist">
       {tracks?.map((track) => {
-        if (track.is_playable || track.is_playable === undefined) {
+        if (track && (track.is_playable || track.is_playable === undefined)) {
           return (
             <SongItem
               track={track}

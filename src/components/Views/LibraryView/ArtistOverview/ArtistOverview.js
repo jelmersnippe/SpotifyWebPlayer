@@ -23,9 +23,13 @@ function ArtistOverview() {
     }
   }, []);
 
-  return artists.map((artist) => (
-    <ArtistItem artist={artist} key={artist.id} />
-  ));
+  return (
+    <div className="content artists">
+      {artists.map((artist) => (
+        <ArtistItem artist={artist} key={artist.id} />
+      ))}
+    </div>
+  );
 }
 
 export default ArtistOverview;
