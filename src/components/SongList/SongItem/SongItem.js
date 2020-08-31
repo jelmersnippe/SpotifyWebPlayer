@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import "./SongItem.scss";
 import SpotifyWebApi from "spotify-web-api-js";
 import PlayArrowIcon from "@material-ui/icons/PlayArrow";
@@ -26,6 +27,7 @@ function SongItem({
 
   return (
     <div className="song-item" onDoubleClick={() => playTrack()}>
+      <PlayArrowIcon className="icon play" onClick={() => playTrack()} />
       <div className="track-info">
         {showArt && (
           <img className="track-art" src={track.album.images[2].url} alt="" />
@@ -46,12 +48,13 @@ function SongItem({
                 }, "")}
               </div>
               <span> - </span>
-              <div className="album">{track.album.name}</div>
+              <Link className="album" to={`/album/${track.album.id}`}>
+                {track.album.name}
+              </Link>
             </div>
           )}
         </div>
       </div>
-      <PlayArrowIcon className="icon play" onClick={() => playTrack()} />
     </div>
   );
 }

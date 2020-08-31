@@ -4,7 +4,7 @@ import "./AlbumItem.scss";
 import { SongList } from "../../../../../components";
 import SpotifyWebApi from "spotify-web-api-js";
 
-function AlbumItem({ album }) {
+function AlbumItem({ album, isLink = true }) {
   const [albumTracks, setAlbumTracks] = useState(null);
   const spotify = new SpotifyWebApi();
 

@@ -45,6 +45,12 @@ function TrackControls({ location }) {
     if (playbackState) {
       setProgress(playbackState.progress_ms);
       setInteractingWithProgress(false);
+
+      if (playbackState.progress_ms === 0) {
+        setTimeout(() => {
+          setProgress((progress) => (progress += 1));
+        }, 1);
+      }
     }
   }, [playbackState]);
 
@@ -208,24 +214,33 @@ function TrackControls({ location }) {
         Has to be checked with a different method,
         probably just an 'isSet' bool
        */}
-      {playbackState && progress > 0 && (
+      {playbackState?.item && (
         <div className="bar">
           <span className="progress">
-            {Math.floor(((progress / 1000) % 3600) / 60)}:
-            {(Math.floor(progress / 1000) % 3600) % 60}
+            {progress > 0 &&
+              `${Math.floor(((progress / 1000) % 3600) / 60)}:${
+                (Math.floor(progress / 1000) % 3600) % 60
+              }`}
           </span>
           <Slider
             className="slider"
-            value={progress}
-            max={playbackState?.item?.duration_ms}
+            value={progress ? progress : 0}
+            max={
+              playbackState?.item?.duration_ms
+                ? playbackState?.item?.duration_ms
+                : 100
+            }
             onChange={handleProgressChange}
             onChangeCommitted={handleProgressCommit}
           />
           <span className="duration">
-            {Math.floor(
-              ((playbackState?.item?.duration_ms / 1000) % 3600) / 60
-            )}
-            :{(Math.floor(playbackState?.item?.duration_ms / 1000) % 3600) % 60}
+            {playbackState?.item?.duration_ms &&
+              `${Math.floor(
+                ((playbackState?.item?.duration_ms / 1000) % 3600) / 60
+              )}:${
+                (Math.floor(playbackState?.item?.duration_ms / 1000) % 3600) %
+                60
+              }`}
           </span>
         </div>
       )}

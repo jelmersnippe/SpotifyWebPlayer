@@ -85,5 +85,10 @@
   > span {
     margin: 0 4px;
     padding: 5px 0;
+    width: 10%;
+
+    &.slider {
+      width: 80%;
+    }
   }
 }

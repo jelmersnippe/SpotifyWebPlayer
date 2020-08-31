@@ -4,9 +4,12 @@
   flex-direction: row;
   padding: 8px;
   align-items: center;
-  justify-content: space-between;
   transition: 0.2s;
   cursor: pointer;
+
+  a:hover {
+    text-decoration: underline;
+  }
 
   &:hover {
     background: rgba(0, 0, 0, 0.7);
@@ -18,11 +21,12 @@
     align-items: center;
 
     .track-art {
-      padding-right: 16px;
+      padding: 0 16px;
     }
 
     .number {
-      margin-right: 8px;
+      margin: 0 8px;
+      user-select: none;
     }
 
     .title {
