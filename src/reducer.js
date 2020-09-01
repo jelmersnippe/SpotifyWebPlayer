@@ -35,15 +35,10 @@ const reducer = (state, action) => {
         artists: action.artists,
       };
     case "SET_ALBUMS":
-      // Add the newly fetched albums to the existing state
-      // and filter out any duplicates
       let newAlbums = state.albums.concat(action.albums);
-      let filteredAlbums = newAlbums.filter(
-        (album, index) => newAlbums.indexOf(album) === index
-      );
       return {
         ...state,
-        albums: filteredAlbums,
+        albums: newAlbums,
       };
     case "SET_SEARCH_RESULTS":
       return {

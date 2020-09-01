@@ -24,7 +24,9 @@ function AlbumOverview() {
   }
 
   useEffect(() => {
-    getAlbums(0);
+    if (albums.length === 0) {
+      getAlbums(0);
+    }
   }, []);
 
   return (

@@ -35,7 +35,6 @@ function SearchView({ type }) {
 
   useEffect(() => {
     if (type) {
-      console.log(type);
       spotify.search(searchTerm, [type], { limit: 50 }).then((response) => {
         setTypeResults(response);
       });
@@ -74,11 +73,16 @@ function SearchView({ type }) {
                 </div>
               </div>
             ))
-          : Object.keys(typeResults).map((key) =>
-              typeResults[key].items.map((item) => {
-                return <div>{item.name}</div>;
-              })
-            )}
+          : Object.keys(typeResults).map((key) => (
+              <div className={`result-block ${key}`} key={key}>
+                <div className={`result-header ${key}`}>
+                  <div className="result-type">{key}</div>
+                </div>
+                {typeResults[key].items.map((item) => {
+                  return <SearchItem item={item} key={item.id} />;
+                })}
+              </div>
+            ))}
       </div>
     </div>
   );

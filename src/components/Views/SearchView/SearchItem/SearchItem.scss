@@ -1,30 +1,83 @@
+@import "../../../../variables";
+
 .search-item {
   display: flex;
   flex-direction: row;
   align-items: center;
-  color: white;
+  color: $color-white;
   width: calc(50% - 8px);
   box-sizing: border-box;
   margin-bottom: 16px;
 
-  @media (max-width: 767px) {
+  @media (max-width: $breakpoint-tablet) {
     width: 100%;
   }
 
   &:hover {
     background: rgba(0, 0, 0, 0.3);
+
+    .art-section:hover {
+      .icon-wrapper {
+        display: flex;
+        background: rgba(0, 0, 0, 0.3);
+      }
+    }
   }
 
-  .art {
-    width: 60px;
+  .art-section {
+    position: relative;
     height: 60px;
-    object-fit: cover;
+
+    .art {
+      width: 60px;
+      height: 60px;
+      object-fit: cover;
+    }
+
+    .icon-wrapper {
+      display: none;
+      position: absolute;
+      justify-content: center;
+      align-items: center;
+      width: 60px;
+      height: 60px;
+      top: 0;
+      left: 0;
+
+      @media (max-width: $breakpoint-tablet) {
+        display: flex;
+      }
+
+      .icon {
+        width: 30px;
+        height: 30px;
+        cursor: pointer;
+        transition: 0.2s;
+        border: 1px solid $color-white;
+        padding: 5px;
+        box-sizing: border-box;
+        background: rgba(0, 0, 0, 0.3);
+        border-radius: 50%;
+
+        &.active {
+          color: $color-green;
+          border-color: $color-green;
+        }
+
+        &:hover {
+          transform: scale(1.2);
+        }
+      }
+    }
   }
 
-  &.artist .art {
-    border-radius: 50%;
-    padding: 4px;
-    box-sizing: border-box;
+  &.artist {
+    .art,
+    .icon-wrapper {
+      border-radius: 50%;
+      padding: 4px;
+      box-sizing: border-box;
+    }
   }
 
   .info {
@@ -33,16 +86,15 @@
     box-sizing: border-box;
     flex: 1;
 
+    .artist,
     .name {
-      font-weight: bold;
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
     }
-    .artist {
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
+
+    .name {
+      font-weight: bold;
     }
   }
 }

@@ -1,17 +1,19 @@
+@import "../../../variables";
+
 .track-controls {
   display: flex;
   flex-direction: column-reverse;
   justify-content: space-between;
   max-width: 300px;
-  color: white;
+  color: $color-white;
 
-  @media (min-width: 767px) {
+  @media (min-width: $breakpoint-tablet) {
     flex: 0.4;
     height: 100%;
     flex-direction: column;
   }
 
-  @media (max-width: 767px) {
+  @media (max-width: $breakpoint-tablet) {
     &.footer-controls {
       .icon {
         display: none;
@@ -56,20 +58,20 @@
       transition: 200ms;
       cursor: pointer;
 
-      @media (min-width: 767px) {
+      @media (min-width: $breakpoint-tablet) {
         &.active,
         &:hover {
-          color: #1db954;
-          border-color: #1db954;
+          color: $color-green;
+          border-color: $color-green;
         }
       }
     }
 
     .play {
-      border: 1px solid white;
+      border: 1px solid $color-white;
       border-radius: 50%;
 
-      @media (min-width: 767px) {
+      @media (min-width: $breakpoint-tablet) {
         &:hover {
           transform: scale(1.2);
           transition: 0.2s ease-in-out;

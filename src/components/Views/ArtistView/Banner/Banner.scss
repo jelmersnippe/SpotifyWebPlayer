@@ -1,3 +1,5 @@
+@import "../../../../variables";
+
 .banner {
   display: flex;
   align-items: flex-end;
@@ -7,17 +9,17 @@
     width: 240px;
     margin-right: 32px;
 
-    @media (max-width: 1024px) {
+    @media (max-width: $breakpoint-desktop) {
       width: 180px;
     }
 
-    @media (max-width: 767px) {
+    @media (max-width: $breakpoint-tablet) {
       display: none;
     }
   }
 
   .info {
-    color: white;
+    color: $color-white;
 
     .title {
       text-transform: uppercase;
@@ -28,11 +30,11 @@
       font-size: 80px;
       word-break: break-word;
 
-      @media (max-width: 1024px) {
+      @media (max-width: $breakpoint-desktop) {
         font-size: 60px;
       }
 
-      @media (max-width: 767px) {
+      @media (max-width: $breakpoint-tablet) {
         font-size: 40px;
       }
     }
@@ -42,10 +44,10 @@
     }
 
     .creator {
-      color: white;
+      color: $color-white;
       margin-top: 8px;
 
-      @media (min-width: 768px) {
+      @media (min-width: $breakpoint-tablet) {
         font-weight: bold;
       }
     }

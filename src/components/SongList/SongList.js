@@ -11,7 +11,7 @@ function SongList({
 }) {
   return (
     <ul className="songlist">
-      {tracks?.map((track) => {
+      {tracks?.map((track, index) => {
         if (track && (track.is_playable || track.is_playable === undefined)) {
           return (
             <SongItem
@@ -20,7 +20,7 @@ function SongList({
               showNumber={showNumber}
               showArt={showArt}
               showArtistAlbum={showArtistAlbum}
-              key={track.id}
+              key={index}
             />
           );
         }

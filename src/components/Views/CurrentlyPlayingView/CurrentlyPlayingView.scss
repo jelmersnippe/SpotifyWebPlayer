@@ -1,3 +1,5 @@
+@import "../../../variables";
+
 .currently-playing.view {
   height: 100vh;
   flex: 1;
@@ -9,7 +11,7 @@
   align-items: center;
 
   .title {
-    color: white;
+    color: $color-white;
     text-align: center;
     margin-bottom: 16px;
   }
@@ -23,7 +25,7 @@
     text-align: center;
 
     .name {
-      color: white;
+      color: $color-white;
       font-weight: bold;
     }
     .artist {
@@ -34,7 +36,7 @@
   .track-controls {
     margin: 16px 0;
 
-    @media (min-width: 768px) {
+    @media (min-width: $breakpoint-tablet) {
       width: 50%;
     }
 

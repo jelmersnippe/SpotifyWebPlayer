@@ -1,12 +1,14 @@
+@import "../../../variables";
+
 .sidebar {
   flex: 0.1;
   min-width: 230px;
-  color: white;
+  color: $color-white;
   background: #040404;
   padding: 24px;
   overflow-y: auto;
 
-  @media (max-width: 767px) {
+  @media (max-width: $breakpoint-tablet) {
     display: none;
   }
 

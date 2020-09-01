@@ -1,5 +1,7 @@
+@import "../../../variables";
+
 .song-item {
-  color: white;
+  color: $color-white;
   display: flex;
   flex-direction: row;
   padding: 8px;
@@ -7,7 +9,7 @@
   transition: 0.2s;
   cursor: pointer;
 
-  @media (max-width: 767px) {
+  @media (max-width: $breakpoint-tablet) {
     .text {
       .title {
         font-size: 14px;
@@ -34,8 +36,8 @@
   &.playing .track-info .text .title,
   &.playing .track-info .duration,
   &.playing .icon.play {
-    color: #1db954;
-    border-color: #1db954;
+    color: $color-green;
+    border-color: $color-green;
   }
 
   a:hover {
@@ -85,7 +87,7 @@
 
   .icon.play {
     padding: 4px;
-    border: 1px solid white;
+    border: 1px solid $color-white;
     border-radius: 50%;
   }
 }

@@ -1,10 +1,12 @@
+@import "../../../variables";
+
 .login {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background: black;
+  background: $color-black;
 
   .logo {
     width: 60%;
@@ -12,8 +14,8 @@
 
   .action {
     text-transform: uppercase;
-    background: #1db954;
-    color: white;
+    background: $color-green;
+    color: $color-white;
     padding: 10px 25px;
     border-radius: 20px;
     border-color: transparent;
@@ -23,7 +25,7 @@
     letter-spacing: 1px;
 
     &:hover {
-      background: darken(#1db954, 5%);
+      background: darken($color-green, 5%);
     }
   }
 }

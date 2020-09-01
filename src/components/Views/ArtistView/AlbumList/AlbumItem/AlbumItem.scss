@@ -1,7 +1,9 @@
+@import "../../../../../variables";
+
 .album-item {
   display: flex;
   flex-direction: column;
-  color: white;
+  color: $color-white;
 
   .album-header {
     display: flex;
@@ -10,7 +12,7 @@
     transition: 0.2s;
 
     &:hover {
-      color: #1db954;
+      color: $color-green;
     }
 
     .art {

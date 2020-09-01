@@ -1,3 +1,5 @@
+@import "../../../variables";
+
 .footer {
   display: flex;
   justify-content: space-between;
@@ -8,7 +10,7 @@
   padding: 16px 24px;
   background: #282828;
   box-sizing: border-box;
-  color: white;
+  color: $color-white;
   height: 96px;
 
   .currently-playing {
@@ -24,7 +26,7 @@
       left: 0;
     }
 
-    @media (min-width: 767px) {
+    @media (min-width: $breakpoint-tablet) {
       max-width: 30%;
       flex: 0.3;
 
@@ -38,19 +40,19 @@
       height: 100%;
       width: auto;
 
-      @media (max-width: 767px) {
+      @media (max-width: $breakpoint-tablet) {
         display: none;
       }
     }
 
     .track-info {
-      @media (min-width: 767px) {
+      @media (min-width: $breakpoint-tablet) {
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
       }
 
-      @media (max-width: 767px) {
+      @media (max-width: $breakpoint-tablet) {
         display: flex;
         flex-wrap: wrap;
         padding-bottom: 8px;
@@ -70,7 +72,7 @@
     justify-content: flex-end;
     align-items: center;
 
-    @media (max-width: 767px) {
+    @media (max-width: $breakpoint-tablet) {
       display: none;
     }
 

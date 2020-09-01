@@ -1,10 +1,12 @@
+@import "../../../variables";
+
 .mobile-nav {
-  @media (min-width: 767px) {
+  @media (min-width: $breakpoint-tablet) {
     display: none;
   }
 
   position: fixed;
-  bottom: 96px;
+  bottom: 95px;
   left: 0;
   width: 100%;
   display: flex;

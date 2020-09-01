@@ -1,3 +1,4 @@
+@import "../../../variables";
 // Add a sticky version when scrolling down the page with just the title
 
 .header {
@@ -7,7 +8,7 @@
   padding-bottom: 16px;
   flex-wrap: wrap-reverse;
 
-  @media (max-width: 767px) {
+  @media (max-width: $breakpoint-tablet) {
     display: none;
   }
 
@@ -23,7 +24,7 @@
     }
 
     .name {
-      color: white;
+      color: $color-white;
       font-weight: bold;
       padding: 0 16px 0 8px;
     }
@@ -33,7 +34,7 @@
 .searchbar {
   display: flex;
   align-items: center;
-  background: white;
+  background: $color-white;
   color: #282828;
   padding: 4px 8px;
   border-radius: 20px;

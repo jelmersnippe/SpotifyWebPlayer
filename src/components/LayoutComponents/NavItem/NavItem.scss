@@ -1,8 +1,10 @@
+@import "../../../variables";
+
 .nav-item {
   color: grey;
 
   &:hover {
-    color: white;
+    color: $color-white;
     transition: 200ms;
   }
 
@@ -17,14 +19,14 @@
     }
 
     &.active {
-      color: #1db954;
+      color: $color-green;
     }
   }
 
   &.playlist .link.active {
     margin-left: -8px;
     padding-left: 8px;
-    border-left: 3px solid #1db954;
-    color: white;
+    border-left: 3px solid $color-green;
+    color: $color-white;
   }
 }
