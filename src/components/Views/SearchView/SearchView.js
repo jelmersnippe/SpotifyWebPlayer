@@ -39,7 +39,7 @@ function SearchView({ type }) {
         setTypeResults(response);
       });
     }
-  }, [type]);
+  }, [type, searchTerm]);
 
   return (
     <div className="search view">

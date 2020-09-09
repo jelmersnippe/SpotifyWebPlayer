@@ -15,7 +15,6 @@ function ArtistView({ id }) {
     spotify
       .getArtist(id)
       .then((response) => {
-        console.log(response);
         setArtist(response);
       })
       .catch((error) => console.log(error));
@@ -26,7 +25,6 @@ function ArtistView({ id }) {
     spotify
       .getArtistAlbums(id, options)
       .then((response) => {
-        console.log(response);
         setArtistAlbums(response);
       })
       .catch((error) => console.log(error));

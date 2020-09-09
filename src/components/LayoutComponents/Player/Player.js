@@ -38,15 +38,6 @@ function Player() {
           console.log(error);
         });
 
-      fetch(`https://api.spotify.com/v1/users/${user.id}/playlists`, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${spotify.getAccessToken()}`,
-        },
-      })
-        .then((response) => response.json())
-        .then((data) => console.log(data));
       spotify
         .getMyCurrentPlaybackState()
         .then((playbackState) => {

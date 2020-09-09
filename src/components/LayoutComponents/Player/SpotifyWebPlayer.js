@@ -51,7 +51,6 @@ function SpotifyWebPlayer({ access_token }) {
 
           // Playback status updates
           player.addListener("player_state_changed", (state) => {
-            console.log(state);
             if (!state || !playbackState) {
               spotifyAPI
                 .getMyCurrentPlaybackState()

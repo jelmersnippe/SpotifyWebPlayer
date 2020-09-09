@@ -9,7 +9,7 @@ function AlbumItem({ album }) {
         className="art"
         src={
           album?.images?.reduce((initial, image) => {
-            if (!initial.url || image.height > initial.height) {
+            if (!initial.url || image.height < initial.height) {
               initial = image;
             }
             return initial;

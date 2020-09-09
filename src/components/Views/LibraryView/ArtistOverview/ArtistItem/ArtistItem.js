@@ -9,7 +9,7 @@ function ArtistItem({ artist }) {
         className="art"
         src={
           artist?.images?.reduce((initial, image) => {
-            if (!initial.url || image.height > initial.height) {
+            if (!initial.url || image.height < initial.height) {
               initial = image;
             }
             return initial;

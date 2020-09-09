@@ -1,3 +1,5 @@
+@import "./variables";
+
 .app {
   height: 100vh;
 }
@@ -5,4 +7,10 @@
 .row-container {
   display: flex;
   flex-direction: row;
+}
+
+@media (max-width: $breakpoint-tablet) {
+  .main-content .view {
+    padding-bottom: 32px;
+  }
 }

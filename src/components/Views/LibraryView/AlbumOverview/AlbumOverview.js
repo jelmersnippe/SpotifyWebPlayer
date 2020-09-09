@@ -27,7 +27,7 @@ function AlbumOverview() {
     if (albums.length === 0) {
       getAlbums(0);
     }
-  }, []);
+  }, [albums]);
 
   return (
     <div className="content artists">

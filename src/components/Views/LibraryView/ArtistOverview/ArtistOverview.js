@@ -21,7 +21,7 @@ function ArtistOverview() {
         })
         .catch((error) => console.log(error));
     }
-  }, []);
+  }, [artists]);
 
   return (
     <div className="content artists">
