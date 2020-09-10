@@ -8,6 +8,10 @@ function PlaylistView({ id }) {
   const [playlist, setPlaylist] = useState(null);
   const spotify = new SpotifyWebApi();
 
+  /*
+   Get a playlist by id with the market as a parameter
+   This prevents fetching tracks that arent's available to the user
+   */
   useEffect(() => {
     spotify
       .getPlaylist(id, { market: "from_token" })

@@ -8,6 +8,7 @@ function AlbumItem({ album }) {
       <img
         className="art"
         src={
+          // Get the smallest image available
           album?.images?.reduce((initial, image) => {
             if (!initial.url || image.height < initial.height) {
               initial = image;
@@ -20,6 +21,7 @@ function AlbumItem({ album }) {
       <div className="info">
         <div className="name">{album.name}</div>
         <div className="creator">
+          {/* If we have multiple artists we concatenate it to a single string */}
           {album?.artists
             .map((artist) => artist.name)
             .reduce((initial, artist) => {

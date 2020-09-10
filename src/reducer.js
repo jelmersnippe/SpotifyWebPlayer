@@ -1,5 +1,3 @@
-// The playingTrack is already inside the playbackState
-// There is no need to track this seperately
 export const initialState = {
   user: null,
   playlists: [],
@@ -11,8 +9,6 @@ export const initialState = {
 };
 
 const reducer = (state, action) => {
-  // console.log(action);
-
   switch (action.type) {
     case "SET_USER":
       return {
@@ -35,6 +31,13 @@ const reducer = (state, action) => {
         artists: action.artists,
       };
     case "SET_ALBUMS":
+      /*     
+		The Spotify API only allows fetching 50 items at a time,
+		therefor we have to concat the newly fetched albums to the existing state
+
+		TODO:
+		Check the state for duplicates
+      */
       let newAlbums = state.albums.concat(action.albums);
       return {
         ...state,

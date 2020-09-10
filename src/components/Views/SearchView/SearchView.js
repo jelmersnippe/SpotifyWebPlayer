@@ -14,6 +14,10 @@ function SearchView({ type }) {
   const history = useHistory();
   const location = useLocation();
 
+  /* 
+  Same functionality as the search bar in the header
+  TODO: Make the searchbar into it's own component OR somehow only have one in the entire app
+  */
   function handleSearch(event) {
     if (location.pathname !== "/search") history.push("/search");
     dispatch({
@@ -33,6 +37,7 @@ function SearchView({ type }) {
       .catch((error) => console.log(error));
   }
 
+  // If a type is specified: fetch 50 items of that type for the type-specific view
   useEffect(() => {
     if (type) {
       spotify.search(searchTerm, [type], { limit: 50 }).then((response) => {
@@ -54,8 +59,13 @@ function SearchView({ type }) {
         />
       </div>
       <div className="result-grid grid">
+        {/* 
+        Split the search results into seperate sections 
+        based on their key in the results object 
+        */}
         {searchResults && !type
-          ? Object.keys(searchResults).map((key) => (
+          ? // If we have not selected a specific type show the overview
+            Object.keys(searchResults).map((key) => (
               <div className={`result-block ${key}`} key={key}>
                 <div className={`result-header ${key}`}>
                   <div className="result-type">{key}</div>
@@ -73,7 +83,8 @@ function SearchView({ type }) {
                 </div>
               </div>
             ))
-          : Object.keys(typeResults).map((key) => (
+          : // If a specific type is selected we show the list view of the single type. Ex: Only albums
+            Object.keys(typeResults).map((key) => (
               <div className={`result-block ${key}`} key={key}>
                 <div className={`result-header ${key}`}>
                   <div className="result-type">{key}</div>

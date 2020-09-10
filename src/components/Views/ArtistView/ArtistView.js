@@ -11,6 +11,11 @@ function ArtistView({ id }) {
   const [artistAlbums, setArtistAlbums] = useState(null);
   const spotify = new SpotifyWebApi();
 
+  /* 
+  Whenever the id changes we fetch the artist from Spotify and set it in state
+  Then we get the artists albums with the current users country code
+  We add the country code to prevent the user seeing albums that arent available in his/her country
+  */
   useEffect(() => {
     spotify
       .getArtist(id)

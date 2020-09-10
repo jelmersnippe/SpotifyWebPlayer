@@ -8,6 +8,7 @@ function ArtistItem({ artist }) {
       <img
         className="art"
         src={
+          // Get the smallest image available
           artist?.images?.reduce((initial, image) => {
             if (!initial.url || image.height < initial.height) {
               initial = image;

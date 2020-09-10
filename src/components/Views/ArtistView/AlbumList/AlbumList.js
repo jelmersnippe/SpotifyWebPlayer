@@ -8,6 +8,13 @@ function AlbumList({ albums }) {
   return (
     <ul className="albumlist">
       {albums?.map((album) => {
+        /* 
+        If the album_group is "appears_on" it is not the artists own album
+        and we dont want to show the full album
+        Otherwise we render an album item
+        
+        TODO: add an extra view section with these albums
+        */
         if (album.album_group === "appears_on") {
           appearsOnAlbums.push(album);
         } else {

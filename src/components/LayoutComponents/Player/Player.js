@@ -24,6 +24,11 @@ function Player() {
   const spotify = new SpotifyWebApi();
   const cookies = new Cookies();
 
+  /* 
+    Whenever the user changes we update the Playlists 
+    and PlaybackState in the global state, so the components
+    update their data
+  */
   useEffect(() => {
     if (user) {
       spotify
@@ -54,6 +59,7 @@ function Player() {
 
   return (
     <>
+      {/* Instantiate the Spotify WebPlayer SDK with the access token given to the API on login */}
       <SpotifyWebPlayer access_token={spotify.getAccessToken()} />
       <Switch>
         <Route path="/currently-playing">
@@ -69,10 +75,7 @@ function Player() {
             <div className="main-content">
               <Header />
               <Switch>
-                {/* 
-            Add functionality for these routes 
-            So basically add a SearchView, HomeView and LibraryView
-            */}
+                {/* Not Yet Implemented */}
                 <Route exact path="/">
                   <HomeView />
                 </Route>
@@ -82,6 +85,7 @@ function Player() {
                 <Route
                   path="/search/:searchType"
                   render={(routerProps) => {
+                    // Render a SearchView with a type depending on URL parameter
                     return (
                       <SearchView type={routerProps.match.params.searchType} />
                     );
@@ -93,6 +97,7 @@ function Player() {
                 <Route
                   path="/library/:libraryType"
                   render={(routerProps) => {
+                    // Render a LibraryView with a type depending on URL parameter
                     return (
                       <LibraryView
                         type={routerProps.match.params.libraryType}
@@ -100,6 +105,12 @@ function Player() {
                     );
                   }}
                 />
+                {/* 
+                  Dirty way to remove expired tokens, a proper token 
+                  refresh/logout should be implemented.
+                  Currently the user can only know his token expired if they check
+                  the console output
+                 */}
                 <Route path="/logout">
                   {() => {
                     cookies.remove("session_token");
@@ -108,6 +119,7 @@ function Player() {
                 <Route
                   path="/playlist/:playlistId"
                   render={(routerProps) => {
+                    // Render a PlaylistView with a playlist id depending on URL parameter
                     return (
                       <PlaylistView id={routerProps.match.params.playlistId} />
                     );
@@ -116,6 +128,7 @@ function Player() {
                 <Route
                   path="/artist/:artistId"
                   render={(routerProps) => {
+                    // Render an ArtistView with an artist id depending on URL parameter
                     return (
                       <ArtistView id={routerProps.match.params.artistId} />
                     );
@@ -124,6 +137,7 @@ function Player() {
                 <Route
                   path="/album/:albumId"
                   render={(routerProps) => {
+                    // Render an AlbumView with an album id depending on URL parameter
                     return <AlbumView id={routerProps.match.params.albumId} />;
                   }}
                 />

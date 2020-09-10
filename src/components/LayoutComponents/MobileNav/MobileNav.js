@@ -10,7 +10,6 @@ function MobileNav() {
     <div className="mobile-nav">
       <NavItem Icon={HomeIcon} path="/" key="home" />
       <NavItem Icon={SearchIcon} path="/search" key="search" />
-      {/* The library button should also be active inside other library types */}
       <NavItem
         Icon={LibraryMusicIcon}
         path="/library/playlists"

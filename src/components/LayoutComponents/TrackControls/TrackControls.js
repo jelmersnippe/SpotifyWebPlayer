@@ -54,11 +54,18 @@ function TrackControls({ location }) {
     }
   }, [playbackState]);
 
+  // When the user changes the progress bar update the local state
   const handleProgressChange = (event, newValue) => {
     setInteractingWithProgress(true);
     setProgress(newValue);
   };
 
+  /* 
+  When the user is done changing the progress bar
+  call the Spotify API to perform the action.
+  We only call the API on commit because otherwise
+  we run into rate limiting issues
+  */
   const handleProgressCommit = (event, newValue) => {
     setProgress(newValue);
     spotify.seek(newValue).catch((error) => {
@@ -67,9 +74,7 @@ function TrackControls({ location }) {
     });
   };
 
-  // Make a seperate component for track control
-  // And preferably put the functionality in a seperate js file
-  // Make the 'setPlaybackState' an async function that can be called anywhere since it's used alot
+  // Switch playstate between playing and paused
   function switchPlayState() {
     if (!playbackState) {
       alert("No playback found!");
@@ -86,6 +91,7 @@ function TrackControls({ location }) {
     }
   }
 
+  // Skip to the next track
   function skipToNext() {
     if (!playbackState) {
       alert("No playback found!");
@@ -96,6 +102,11 @@ function TrackControls({ location }) {
     });
   }
 
+  /*
+    Attempt to skip to the previous track.
+    If this is not allowed we just restart the current track
+    by setting it's progress to 0
+  */
   function skipToPrevious() {
     if (!playbackState) {
       alert("No playback found!");
@@ -110,6 +121,10 @@ function TrackControls({ location }) {
     }
   }
 
+  /*
+   Change the shuffle state in the following order:
+   off -> context -> track -> off     etc.
+   */
   function setShuffle() {
     if (!playbackState) {
       alert("No playback found!");
@@ -138,6 +153,11 @@ function TrackControls({ location }) {
   }
 
   return (
+    /* 
+    Since the track controls can appear in the footer and 
+    in the 'currently-playing' view and they require different 
+    styling we pass the location prop to the className
+    */
     <div className={`track-controls ${location && location + "-controls"}`}>
       <div className="actions">
         <button onClick={() => setShuffle()}>
@@ -205,6 +225,7 @@ function TrackControls({ location }) {
       {playbackState?.item && (
         <div className="bar">
           <span className="progress">
+            {/* Convert the progress into minutes : seconds */}
             {progress > 0 &&
               `${Math.floor(((progress / 1000) % 3600) / 60)}:${
                 (Math.floor(progress / 1000) % 3600) % 60
@@ -222,6 +243,7 @@ function TrackControls({ location }) {
             onChangeCommitted={handleProgressCommit}
           />
           <span className="duration">
+            {/* Convert the tracks duration into minutes : seconds */}
             {playbackState?.item?.duration_ms &&
               `${Math.floor(
                 ((playbackState?.item?.duration_ms / 1000) % 3600) / 60

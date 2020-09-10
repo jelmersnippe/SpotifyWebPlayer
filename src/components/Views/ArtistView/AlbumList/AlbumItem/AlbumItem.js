@@ -8,6 +8,7 @@ function AlbumItem({ album, isLink = true }) {
   const [albumTracks, setAlbumTracks] = useState(null);
   const spotify = new SpotifyWebApi();
 
+  // Get the album tracks and set them in local state
   useEffect(() => {
     spotify
       .getAlbumTracks(album.id, { limit: 50 })
@@ -18,17 +19,20 @@ function AlbumItem({ album, isLink = true }) {
   }, [album]);
 
   return (
-    // When this album is clicked to go to the album view
-    // We already have all the album information.
-    // This means we have to find a way to pass those props through the Link
-    // so they can be used inside the AlbumView component and we dont have to do an unneeded API call
+    /* 
+    When this album is clicked to go to the album view
+    We already have all the album information.
+    This means we have to find a way to pass those props through the Link
+    so they can be used inside the AlbumView component and we dont have to do an unneeded API call
+    */
     <div className="album-item">
       <Link className="album-header" to={`/album/${album.id}`}>
         <img
           className="art"
           src={
+            // Get the smallest album image available
             album?.images?.reduce((initial, image) => {
-              if (!initial.url || image.height > initial.height) {
+              if (!initial.url || image.height < initial.height) {
                 initial = image;
               }
               return initial;
@@ -38,6 +42,7 @@ function AlbumItem({ album, isLink = true }) {
         />
         <div className="album-info">
           <h4 className="year">
+            {/* Parse the release date of the album and only show the year */}
             {new Date(Date.parse(album.release_date)).getFullYear()}
           </h4>
           <h2 className="name">{album.name}</h2>

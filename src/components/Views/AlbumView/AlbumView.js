@@ -7,6 +7,7 @@ function AlbumView({ id }) {
   const [album, setAlbum] = useState(null);
   const spotify = new SpotifyWebApi();
 
+  // Whenever the id changes we fetch the album from Spotify and set it in state
   useEffect(() => {
     spotify
       .getAlbum(id)

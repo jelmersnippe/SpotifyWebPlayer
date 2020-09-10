@@ -38,8 +38,9 @@ function Sidebar() {
         />
       </ul>
 
-      <ul className="section playlists">
+      <div className="section playlists">
         <h3 className="section-title">Playlists</h3>
+        {/* Map all playlists in the state to a listview in the sidebar */}
         {playlists?.items?.map((playlist) => (
           <NavItem
             type="playlist"
@@ -48,7 +49,7 @@ function Sidebar() {
             key={playlist.id}
           />
         ))}
-      </ul>
+      </div>
     </div>
   );
 }

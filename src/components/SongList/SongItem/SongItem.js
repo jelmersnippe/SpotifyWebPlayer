@@ -7,6 +7,10 @@ import PauseIcon from "@material-ui/icons/Pause";
 import PlaylistPlayIcon from "@material-ui/icons/PlaylistPlay";
 import { useDataLayerValue } from "../../../DataLayer";
 
+/*
+  The props are passed down from the SongList component
+  and decide which elements of the SongItem should be rendered
+*/
 function SongItem({
   track,
   showNumber = false,
@@ -15,7 +19,7 @@ function SongItem({
   context_uri,
 }) {
   const spotify = new SpotifyWebApi();
-  const [{ playbackState }] = useDataLayerValue();
+  const { playbackState } = useDataLayerValue();
 
   function playTrack() {
     spotify
@@ -51,6 +55,13 @@ function SongItem({
       }`}
       onDoubleClick={() => playTrack()}
     >
+      {/* 
+        If this SongItem is the currently playing item
+            and it is playing -> show a pause button
+            and it is paused -> show a play button that resumes playback
+        Else
+            show a play button that starts the track in its context
+      */}
       {playbackState?.item?.id === track.id &&
       playbackState?.context.uri === context_uri ? (
         playbackState.is_playing ? (
@@ -67,6 +78,7 @@ function SongItem({
           <PlayArrowIcon className="icon play" />
         </button>
       )}
+
       <div className="track-info">
         {showArt && (
           <img className="track-art" src={track.album.images[2].url} alt="" />
@@ -78,6 +90,7 @@ function SongItem({
           {showArtistAlbum && (
             <div className="artist-album">
               <div className="artist">
+                {/* If there are multiple artists we concatenate them to a single string */}
                 {track.artists.reduce((initial, artist) => {
                   if (initial !== "") {
                     initial += ", ";
@@ -93,9 +106,12 @@ function SongItem({
             </div>
           )}
         </div>
+
         <button className="enqueue" onClick={() => queueTrack()}>
           <PlaylistPlayIcon className="enqueue-icon" />
         </button>
+
+        {/* Show duration as minutes : seconds */}
         <div className="duration">{`${Math.floor(
           ((track.duration_ms / 1000) % 3600) / 60
         )}:${(Math.floor(track.duration_ms / 1000) % 3600) % 60}`}</div>

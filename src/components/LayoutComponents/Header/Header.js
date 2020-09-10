@@ -13,11 +13,21 @@ function Header() {
   const location = useLocation();
 
   function handleSearch(event) {
+    // If we are not on the search page, navigate to the search page
     if (location.pathname !== "/search") history.push("/search");
+
+    // Set the new search term in the global state
     dispatch({
       type: "SET_SEARCH_TERM",
       searchTerm: event.target.value,
     });
+
+    /* 
+      Call the search function in the Spotify API
+      Limited to 4 per category since we only display 4 in the overview
+      When the results come in, add them to the global state
+      so we can show them again if the user goes back to the search page
+    */
     spotify
       .search(event.target.value, ["album", "artist", "track", "playlist"], {
         limit: 4,
@@ -31,6 +41,7 @@ function Header() {
       .catch((error) => console.log(error));
   }
 
+  // On load get the user from Spotify so we can populate the user section of the header
   useEffect(() => {
     spotify
       .getMe()

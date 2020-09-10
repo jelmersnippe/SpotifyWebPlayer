@@ -9,6 +9,7 @@ function ArtistOverview() {
   const [{ artists }, dispatch] = useDataLayerValue();
   const spotify = new SpotifyWebApi();
 
+  // Get the users followed artists if there are none in the state
   useEffect(() => {
     if (artists.length === 0) {
       spotify
@@ -21,7 +22,7 @@ function ArtistOverview() {
         })
         .catch((error) => console.log(error));
     }
-  }, [artists]);
+  }, []);
 
   return (
     <div className="content artists">

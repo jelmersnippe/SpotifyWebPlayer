@@ -2,6 +2,10 @@ import React from "react";
 import "./SongList.scss";
 import { SongItem } from "./SongItem";
 
+/* 
+We use this SongList in multiple places
+With the props we can decide which elements of a track to show
+*/
 function SongList({
   tracks,
   context,
@@ -11,6 +15,7 @@ function SongList({
 }) {
   return (
     <ul className="songlist">
+      {/* Map all playable tracks to a song item */}
       {tracks?.map((track, index) => {
         if (track && (track.is_playable || track.is_playable === undefined)) {
           return (

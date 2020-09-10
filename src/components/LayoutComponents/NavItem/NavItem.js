@@ -11,6 +11,7 @@ function NavItem({ text, Icon, path, type }) {
         activeClassName="active"
         to={path}
       >
+        {/* If/else logic to show an icon, text or both */}
         {Icon ? (
           <>
             <Icon className="icon" />

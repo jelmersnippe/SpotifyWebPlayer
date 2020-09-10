@@ -13,6 +13,10 @@ function Footer() {
   const [volume, setVolume] = useState(100);
   const spotify = new SpotifyWebApi();
 
+  /*
+   When the user let's go of the volume slider, call the API to change volume
+   We only update on change commit because otherwise we run into rate limiting issues
+  */
   function handleVolumeCommit(event, newValue) {
     if (!playbackState) {
       alert("No playback found!");
@@ -21,6 +25,7 @@ function Footer() {
     spotify.setVolume(newValue).catch((error) => console.log(error));
   }
 
+  // On change of the volume slider, update the components state
   function handleVolumeChange(event, newValue) {
     if (!playbackState) {
       alert("No playback found!");
@@ -29,6 +34,7 @@ function Footer() {
     setVolume(newValue);
   }
 
+  // Update the volume whenever the playbackState changes
   useEffect(() => {
     if (playbackState) {
       setVolume(playbackState?.device?.volume_percent);
@@ -44,6 +50,7 @@ function Footer() {
               <img
                 className="album-cover"
                 src={
+                  // Get the smallest album image available
                   playbackState?.item?.album?.images?.reduce(
                     (initial, image) => {
                       if (!initial.url || image.height < initial.height) {
@@ -60,6 +67,7 @@ function Footer() {
             <div className="track-info">
               <h4 className="name">{playbackState?.item?.name}</h4>
               <span className="artist">
+                {/* If there are multiple artists, their names get concatenated to a single string */}
                 {playbackState?.item?.artists
                   .map((artist) => artist.name)
                   .reduce((initial, artist) => {
