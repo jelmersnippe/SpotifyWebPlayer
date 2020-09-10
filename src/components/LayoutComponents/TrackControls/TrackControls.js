@@ -113,7 +113,12 @@ function TrackControls({ location }) {
       return;
     }
     if (playbackState?.actions?.disallows?.skipping_prev) {
-      spotify.seek(0).catch((error) => console.log(error));
+      spotify
+        .seek(0)
+        .then(() => {
+          setProgress(1);
+        })
+        .catch((error) => console.log(error));
     } else {
       spotify.skipToPrevious().catch((error) => {
         console.log(error);
@@ -135,21 +140,32 @@ function TrackControls({ location }) {
       .catch((error) => console.log(error));
   }
 
+  /*
+    State never fetches from the Spotify API
+    but always through the web SDK, which does
+    not properly add repeat_state
+
+    TODO: fix this by manually setting the repeat_state OR performing a GetPlaybackState
+  */
   function setRepeat() {
-    switch (playbackState.repeat_state) {
-      case "off":
-        spotify.setRepeat("context");
-        break;
-      case "context":
-        spotify.setRepeat("track");
-        break;
-      case "track":
-        spotify.setRepeat("off");
-        break;
-      default:
-        spotify.setRepeat("off");
-        break;
-    }
+    alert("Not working for the moment");
+    // switch (playbackState.repeat_state) {
+    //   case undefined:
+    //     spotify.setRepeat("context").catch((error) => console.log(error));
+    //     break;
+    //   case "off":
+    //     spotify.setRepeat("context").catch((error) => console.log(error));
+    //     break;
+    //   case "context":
+    //     spotify.setRepeat("track").catch((error) => console.log(error));
+    //     break;
+    //   case "track":
+    //     spotify.setRepeat("off").catch((error) => console.log(error));
+    //     break;
+    //   default:
+    //     spotify.setRepeat("off").catch((error) => console.log(error));
+    //     break;
+    // }
   }
 
   return (
