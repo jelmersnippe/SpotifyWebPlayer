@@ -11,12 +11,17 @@ a {
   color: unset;
 }
 
+// TODO: Only apply focus styling when using keyboard
+// https://codepen.io/anon/pen/XYoJQv
 :focus {
   outline: 1px solid $color-green;
 
   @media (max-width: $breakpoint-tablet) {
     outline: 0;
   }
+}
+body.using-mouse :focus {
+  outline: 0;
 }
 ::-moz-focus-inner {
   border: 0;

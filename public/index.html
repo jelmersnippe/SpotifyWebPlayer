@@ -13,6 +13,15 @@
     <title>Spotify Web Player by Jelmer Snippe</title>
   </head>
   <body>
+    <script>
+      document.addEventListener("mousedown", function () {
+        document.body.classList.add("using-mouse");
+      });
+
+      document.addEventListener("keydown", function (key) {
+        document.body.classList.remove("using-mouse");
+      });
+    </script>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
   </body>
