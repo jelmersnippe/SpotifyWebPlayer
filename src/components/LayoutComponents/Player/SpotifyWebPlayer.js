@@ -102,6 +102,7 @@ function SpotifyWebPlayer({ access_token }) {
 
           // Ready
           player.addListener("ready", ({ device_id }) => {
+            console.log("Device ready: ", device_id);
             /*
               Take over the Spotify playback on this player
             */
