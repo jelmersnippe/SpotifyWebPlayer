@@ -54,12 +54,18 @@ function SongItem({
       {playbackState?.item?.id === track.id &&
       playbackState?.context.uri === context_uri ? (
         playbackState.is_playing ? (
-          <PauseIcon className="icon play" onClick={() => pauseTrack()} />
+          <button onClick={() => pauseTrack()}>
+            <PauseIcon className="icon play" />
+          </button>
         ) : (
-          <PlayArrowIcon className="icon play" onClick={() => resumeTrack()} />
+          <button onClick={() => resumeTrack()}>
+            <PlayArrowIcon className="icon play" />
+          </button>
         )
       ) : (
-        <PlayArrowIcon className="icon play" onClick={() => playTrack()} />
+        <button onClick={() => playTrack()}>
+          <PlayArrowIcon className="icon play" />
+        </button>
       )}
       <div className="track-info">
         {showArt && (
@@ -87,7 +93,9 @@ function SongItem({
             </div>
           )}
         </div>
-        <PlaylistPlayIcon className="enqueue" onClick={() => queueTrack()} />
+        <button className="enqueue" onClick={() => queueTrack()}>
+          <PlaylistPlayIcon className="enqueue-icon" />
+        </button>
         <div className="duration">{`${Math.floor(
           ((track.duration_ms / 1000) % 3600) / 60
         )}:${(Math.floor(track.duration_ms / 1000) % 3600) % 60}`}</div>

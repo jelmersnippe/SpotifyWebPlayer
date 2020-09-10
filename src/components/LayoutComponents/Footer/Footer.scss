@@ -18,6 +18,10 @@
     display: flex;
     align-items: center;
 
+    a {
+      margin-right: 16px;
+    }
+
     .mobile-overlay {
       position: absolute;
       width: 100%;
@@ -35,13 +39,15 @@
       }
     }
 
-    .album-cover {
-      padding-right: 16px;
-      height: 100%;
-      width: auto;
-
+    .album-cover-wrapper {
       @media (max-width: $breakpoint-tablet) {
         display: none;
+      }
+
+      .album-cover {
+        height: 100%;
+        width: auto;
+        vertical-align: middle;
       }
     }
 

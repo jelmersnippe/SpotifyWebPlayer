@@ -140,62 +140,68 @@ function TrackControls({ location }) {
   return (
     <div className={`track-controls ${location && location + "-controls"}`}>
       <div className="actions">
-        <ShuffleIcon
-          onClick={() => setShuffle()}
-          className={`icon shuffle ${playbackState?.shuffle_state && "active"}`}
-        />
-        <SkipPreviousIcon
+        <button onClick={() => setShuffle()}>
+          <ShuffleIcon
+            className={`icon shuffle ${
+              playbackState?.shuffle_state && "active"
+            }`}
+          />
+        </button>
+        <button
           onClick={() => {
             skipToPrevious();
           }}
-          className="icon prev"
-        />
+        >
+          <SkipPreviousIcon className="icon prev" />
+        </button>
 
         {playbackState?.is_playing ? (
-          <PauseIcon
+          <button
             onClick={() => {
               switchPlayState();
             }}
-            className="icon play"
-          />
+          >
+            <PauseIcon className="icon play" />
+          </button>
         ) : (
-          <PlayArrowIcon
+          <button
             onClick={() => {
               switchPlayState();
             }}
-            className="icon play"
-          />
+          >
+            <PlayArrowIcon className="icon play" />
+          </button>
         )}
-        <SkipNextIcon
+        <button
           onClick={() => {
             skipToNext();
           }}
-          className="icon next"
-        />
+        >
+          <SkipNextIcon className="icon next" />
+        </button>
         {playbackState?.repeat_state === "track" ? (
-          <RepeatOneIcon
-            className="icon repeat active"
+          <button
             onClick={() => {
               setRepeat();
             }}
-          />
+          >
+            <RepeatOneIcon className="icon repeat active" />
+          </button>
         ) : (
-          <RepeatIcon
-            className={`icon repeat ${
-              playbackState?.repeat_mode === "context" && "active"
-            }`}
+          <button
             onClick={() => {
               setRepeat();
             }}
-          />
+          >
+            <RepeatIcon
+              className={`icon repeat ${
+                playbackState?.repeat_mode === "context" && "active"
+              }`}
+            />
+          </button>
         )}
       </div>
 
-      {/* 
-        This display '0' when the progress is at 0
-        Has to be checked with a different method,
-        probably just an 'isSet' bool
-       */}
       {playbackState?.item && (
         <div className="bar">
           <span className="progress">

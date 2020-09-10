@@ -40,7 +40,7 @@ function Footer() {
       <div className="currently-playing">
         {playbackState && (
           <>
-            <Link to="/currently-playing">
+            <Link to="/currently-playing" className="album-cover-wrapper">
               <img
                 className="album-cover"
                 src={

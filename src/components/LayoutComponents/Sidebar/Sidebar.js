@@ -18,6 +18,7 @@ function Sidebar() {
         title="Open Spotify.com in the browser"
         target="_blank"
         rel="noopener noreferrer"
+        className="logo-wrapper"
       >
         <img
           className="logo"

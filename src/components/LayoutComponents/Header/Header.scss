@@ -33,14 +33,23 @@
 
 .searchbar {
   display: flex;
+  flex-basis: 200px;
   align-items: center;
   background: $color-white;
   color: #282828;
   padding: 4px 8px;
   border-radius: 20px;
+  transition: 300ms;
+
+  &:focus-within {
+    flex: 1;
+    margin-right: 20%;
+    box-shadow: 0 0 0 3px $color-green;
+  }
 
   .input {
     outline: none;
     border: none;
+    width: 100%;
   }
 }
