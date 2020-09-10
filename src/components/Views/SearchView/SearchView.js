@@ -85,7 +85,7 @@ function SearchView({ type }) {
             ))
           : // If a specific type is selected we show the list view of the single type. Ex: Only albums
             Object.keys(typeResults).map((key) => (
-              <div className={`result-block ${key}`} key={key}>
+              <div className={`result-block ${key} specific`} key={key}>
                 <div className={`result-header ${key}`}>
                   <div className="result-type">{key}</div>
                 </div>
