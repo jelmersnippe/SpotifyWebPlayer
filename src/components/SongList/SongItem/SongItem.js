@@ -19,7 +19,7 @@ function SongItem({
   context_uri,
 }) {
   const spotify = new SpotifyWebApi();
-  const { playbackState } = useDataLayerValue();
+  const [{ playbackState }] = useDataLayerValue();
 
   function playTrack() {
     spotify

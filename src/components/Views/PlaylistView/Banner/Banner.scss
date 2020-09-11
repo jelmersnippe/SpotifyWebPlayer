@@ -3,7 +3,11 @@
 .banner {
   display: flex;
   align-items: flex-end;
-  padding-bottom: 32px;
+  padding-bottom: 16px;
+
+  @media (min-width: $breakpoint-tablet) {
+    padding-bottom: 32px;
+  }
 
   .art {
     width: 240px;
