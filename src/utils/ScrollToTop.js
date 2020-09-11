@@ -10,7 +10,10 @@ export default function ScrollToTop() {
   This prevents loading a new component already scrolled
   */
   useEffect(() => {
-    document.getElementsByClassName("main-content")[0].scrollTop = 0;
+    var mainContentElements = document.getElementsByClassName("main-content");
+    if (mainContentElements.length > 0) {
+      mainContentElements[0].scrollTop = 0;
+    }
     window.scrollTo(0, 0);
   }, [pathname]);
 
